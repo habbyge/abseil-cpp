@@ -1,5 +1,26 @@
 # Abseil - C++ Common Libraries
 
+一句话概括，这个库的特点是用 C++ 11 的代码实现了许多 C++ 14 和 C++ 17 的特性，所以你的编
+译器也要支持 C++ 11（gcc 4.8+/clang 3.3+，不同平台略有差异）。
+
+需要注意一点的是 Google 内部代码是不支持异常（Excepton）的，C++ 异常的优劣之处有许多讨论
+（知乎上的讨论），不用异常可以在一定程度上利于编译器优化，这里主要可能还是历史支持原因。如果
+你的项目是支持异常的建议要好好测试一下，具体参考下 abseil / Abseil Fundamentals 。
+
+Abseil 简要组成部分如下：
+- base Abseil Fundamentals ：包含初始化代码和其它部分依赖的代码。除了 C++ 标准库外不依赖外部代码
+- algorithm ：C++ <algorithm> 库的增强
+- container ：STL 风格容器
+- debugging ：内存泄露检查
+- memory ：智能指针和内存管理
+- meta ：用 C++11 兼容代码支持 C++14 和 C++17 版本的 <type_traits> 库
+- numeric ：支持 C++11 兼容的 128 位整数
+- strings ：string 相关函数增强
+- synchronization ：同步原语和抽象支持
+- time ：时间方面的计算
+- types ：非容器类型的工具类型
+
+
 The repository contains the Abseil C++ library code. Abseil is an open-source
 collection of C++ code (compliant to C++11) designed to augment the C++
 standard library.
