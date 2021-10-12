@@ -36,22 +36,24 @@ ABSL_NAMESPACE_BEGIN
 namespace base_internal {
 
 // See spinlock_wait.h for spec.
-uint32_t SpinLockWait(std::atomic<uint32_t> *w, int n,
+uint32_t SpinLockWait(std::atomic<uint32_t>* w, int n,
                       const SpinLockWaitTransition trans[],
                       base_internal::SchedulingMode scheduling_mode) {
   int loop = 0;
   for (;;) {
     uint32_t v = w->load(std::memory_order_acquire);
     int i;
-    for (i = 0; i != n && v != trans[i].from; i++) {
-    }
-    if (i == n) {
+    // 一直找到v == n表示轮训完了也没找着 or 找到trans中的其实状态为v的，则跳出
+    for (i = 0; i != n && v != trans[i].from; i++) {}
+    if (i == n) { // 结束了、没找着
       SpinLockDelay(w, v, ++loop, scheduling_mode);  // no matching transition
     } else if (trans[i].to == v ||                   // null transition
                w->compare_exchange_strong(v, trans[i].to,
                                           std::memory_order_acquire,
                                           std::memory_order_relaxed)) {
-      if (trans[i].done) return v;
+      if (trans[i].done) {
+        return v;
+      }
     }
   }
 }

@@ -27,7 +27,7 @@ namespace absl {
 ABSL_NAMESPACE_BEGIN
 namespace {
 
-absl::once_flag once;
+absl::once_flag once; // 这个必须是全局的
 
 ABSL_CONST_INIT Mutex counters_mu(absl::kConstInit);
 

@@ -59,6 +59,7 @@ extern "C" {
 ABSL_ATTRIBUTE_WEAK void ABSL_INTERNAL_C_SYMBOL(AbslInternalSpinLockDelay)(
     std::atomic<uint32_t> *w, uint32_t value, int loop,
     absl::base_internal::SchedulingMode) {
+
   absl::base_internal::ErrnoSaver errno_saver;
   struct timespec tm;
   tm.tv_sec = 0;
