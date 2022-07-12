@@ -50,8 +50,7 @@ ABSL_NAMESPACE_BEGIN
 class Barrier {
  public:
   // `num_threads` is the number of threads that will participate in the barrier
-  explicit Barrier(int num_threads)
-      : num_to_block_(num_threads), num_to_exit_(num_threads) {}
+  explicit Barrier(int num_threads) : num_to_block_(num_threads), num_to_exit_(num_threads) {}
 
   Barrier(const Barrier&) = delete;
   Barrier& operator=(const Barrier&) = delete;

@@ -228,8 +228,7 @@ static void WriteSignalMessage(int signo, int cpu,
   if (cpu != -1) {
     snprintf(on_cpu, sizeof(on_cpu), " on cpu %d", cpu);
   }
-  const char* const signal_string =
-      debugging_internal::FailureSignalToString(signo);
+  const char* const signal_string = debugging_internal::FailureSignalToString(signo);
   if (signal_string != nullptr && signal_string[0] != '\0') {
     snprintf(buf, sizeof(buf), "*** %s received at time=%ld%s ***\n",
              signal_string,

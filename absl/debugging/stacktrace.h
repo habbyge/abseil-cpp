@@ -78,8 +78,7 @@ ABSL_NAMESPACE_BEGIN
 //
 // This routine may return fewer stack frame entries than are
 // available. Also note that `result` and `sizes` must both be non-null.
-extern int GetStackFrames(void** result, int* sizes, int max_depth,
-                          int skip_count);
+extern int GetStackFrames(void** result, int* sizes, int max_depth, int skip_count);
 
 // GetStackFramesWithContext()
 //

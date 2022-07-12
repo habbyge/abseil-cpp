@@ -69,6 +69,7 @@ ABSL_ATTRIBUTE_ALWAYS_INLINE inline int Unwind(void** result, int* sizes,
                                                int max_depth, int skip_count,
                                                const void* uc,
                                                int* min_dropped_frames) {
+                                                 
   Unwinder f = &UnwindImpl<IS_STACK_FRAMES, IS_WITH_CONTEXT>;
   Unwinder g = custom.load(std::memory_order_acquire);
   if (g != nullptr) f = g;
@@ -83,16 +84,19 @@ ABSL_ATTRIBUTE_ALWAYS_INLINE inline int Unwind(void** result, int* sizes,
 
 }  // anonymous namespace
 
-ABSL_ATTRIBUTE_NOINLINE ABSL_ATTRIBUTE_NO_TAIL_CALL int GetStackFrames(
-    void** result, int* sizes, int max_depth, int skip_count) {
-  return Unwind<true, false>(result, sizes, max_depth, skip_count, nullptr,
-                             nullptr);
+ABSL_ATTRIBUTE_NOINLINE ABSL_ATTRIBUTE_NO_TAIL_CALL int GetStackFrames(void** result, 
+                                                                       int* sizes, 
+                                                                       int max_depth, 
+                                                                       int skip_count) {
+
+  return Unwind<true, false>(result, sizes, max_depth, skip_count, nullptr, nullptr);
 }
 
 ABSL_ATTRIBUTE_NOINLINE ABSL_ATTRIBUTE_NO_TAIL_CALL int
 GetStackFramesWithContext(void** result, int* sizes, int max_depth,
                           int skip_count, const void* uc,
                           int* min_dropped_frames) {
+
   return Unwind<true, true>(result, sizes, max_depth, skip_count, uc,
                             min_dropped_frames);
 }

@@ -171,14 +171,16 @@ void CallOnceImpl(std::atomic<uint32_t>* control,
   // kOnceDone. If it returns kOnceDone, it must have loaded the control word
   // with std::memory_order_acquire and seen a value of kOnceDone.
   uint32_t old_control = kOnceInit;
-  if (control->compare_exchange_strong(old_control, kOnceRunning,
+  if (control->compare_exchange_strong(old_control,
+                                       kOnceRunning,
                                        std::memory_order_relaxed) ||
-      base_internal::SpinLockWait(control, ABSL_ARRAYSIZE(trans), trans,
+      base_internal::SpinLockWait(control,
+                                  ABSL_ARRAYSIZE(trans),
+                                  trans,
                                   scheduling_mode) == kOnceInit) {
-    base_internal::invoke(std::forward<Callable>(fn),
-                          std::forward<Args>(args)...);
-    old_control =
-        control->exchange(base_internal::kOnceDone, std::memory_order_release);
+
+    base_internal::invoke(std::forward<Callable>(fn), std::forward<Args>(args)...);
+    old_control = control->exchange(base_internal::kOnceDone, std::memory_order_release);
     if (old_control == base_internal::kOnceWaiter) {
       base_internal::SpinLockWake(control, true);
     }
@@ -202,6 +204,9 @@ void LowLevelCallOnce(absl::once_flag* flag, Callable&& fn, Args&&... args) {
 
 }  // namespace base_internal
 
+/** 
+ * 支持任意参数的回调函数
+ */
 template <typename Callable, typename... Args>
 void call_once(absl::once_flag& flag, Callable&& fn, Args&&... args) {
   std::atomic<uint32_t>* once = base_internal::ControlWord(&flag);

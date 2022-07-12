@@ -50,7 +50,7 @@
 // Arithmetic overflows/underflows to +/- infinity and saturates.
 
 #if defined(_MSC_VER)
-#include <winsock2.h>  // for timeval
+#  include <winsock2.h> // for timeval
 #endif
 
 #include <algorithm>
@@ -86,14 +86,14 @@ constexpr int64_t kint64min = std::numeric_limits<int64_t>::min();
 
 // Can't use std::isinfinite() because it doesn't exist on windows.
 inline bool IsFinite(double d) {
-  if (std::isnan(d)) return false;
-  return d != std::numeric_limits<double>::infinity() &&
-         d != -std::numeric_limits<double>::infinity();
+  if (std::isnan(d)) 
+    return false;
+  return d != std::numeric_limits<double>::infinity() && d != -std::numeric_limits<double>::infinity();
 }
 
 inline bool IsValidDivisor(double d) {
   if (std::isnan(d)) return false;
-  return d != 0.0;
+    return d != 0.0;
 }
 
 // Can't use std::round() because it is only available in C++11.
@@ -118,7 +118,7 @@ inline uint128 MakeU128(int64_t a) {
   uint128 u128 = 0;
   if (a < 0) {
     ++u128;
-    ++a;  // Makes it safe to negate 'a'
+    ++a; // Makes it safe to negate 'a'
     a = -a;
   }
   u128 += static_cast<uint64_t>(a);
@@ -146,7 +146,7 @@ inline Duration MakeDurationFromU128(uint128 u128, bool is_neg) {
   uint32_t rep_lo;
   const uint64_t h64 = Uint128High64(u128);
   const uint64_t l64 = Uint128Low64(u128);
-  if (h64 == 0) {  // fastpath
+  if (h64 == 0) { // fastpath
     const uint64_t hi = l64 / kTicksPerSecond;
     rep_hi = static_cast<int64_t>(hi);
     rep_lo = static_cast<uint32_t>(l64 - hi * kTicksPerSecond);
@@ -167,8 +167,7 @@ inline Duration MakeDurationFromU128(uint128 u128, bool is_neg) {
     const uint128 kTicksPerSecond128 = static_cast<uint64_t>(kTicksPerSecond);
     const uint128 hi = u128 / kTicksPerSecond128;
     rep_hi = static_cast<int64_t>(Uint128Low64(hi));
-    rep_lo =
-        static_cast<uint32_t>(Uint128Low64(u128 - hi * kTicksPerSecond128));
+    rep_lo = static_cast<uint32_t>(Uint128Low64(u128 - hi * kTicksPerSecond128));
   }
   if (is_neg) {
     rep_hi = -rep_hi;
@@ -188,9 +187,7 @@ inline Duration MakeDurationFromU128(uint128 u128, bool is_neg) {
 // name intN_t designates a signed integer type with width N, no padding
 // bits, and a two's complement representation." So, we can convert to
 // and from the corresponding uint64_t value using a bit cast.
-inline uint64_t EncodeTwosComp(int64_t v) {
-  return absl::bit_cast<uint64_t>(v);
-}
+inline uint64_t EncodeTwosComp(int64_t v) { return absl::bit_cast<uint64_t>(v); }
 inline int64_t DecodeTwosComp(uint64_t v) { return absl::bit_cast<int64_t>(v); }
 
 // Note: The overflow detection in this function is done using greater/less *or
@@ -275,12 +272,9 @@ inline Duration ScaleDouble(Duration d, double r) {
 // Tries to divide num by den as fast as possible by looking for common, easy
 // cases. If the division was done, the quotient is in *q and the remainder is
 // in *rem and true will be returned.
-inline bool IDivFastPath(const Duration num, const Duration den, int64_t* q,
-                         Duration* rem) {
+inline bool IDivFastPath(const Duration num, const Duration den, int64_t* q, Duration* rem) {
   // Bail if num or den is an infinity.
-  if (time_internal::IsInfiniteDuration(num) ||
-      time_internal::IsInfiniteDuration(den))
-    return false;
+  if (time_internal::IsInfiniteDuration(num) || time_internal::IsInfiniteDuration(den)) return false;
 
   int64_t num_hi = time_internal::GetRepHi(num);
   uint32_t num_lo = time_internal::GetRepLo(num);
@@ -347,7 +341,7 @@ inline bool IDivFastPath(const Duration num, const Duration den, int64_t* q,
   return false;
 }
 
-}  // namespace
+} // namespace
 
 namespace time_internal {
 
@@ -355,8 +349,7 @@ namespace time_internal {
 // bounds of int64_t.  If it does saturate, the difference will spill over to
 // the remainder.  If it does not saturate, the remainder remain accurate,
 // but the returned quotient will over/underflow int64_t and should not be used.
-int64_t IDivDuration(bool satq, const Duration num, const Duration den,
-                     Duration* rem) {
+int64_t IDivDuration(bool satq, const Duration num, const Duration den, Duration* rem) {
   int64_t q = 0;
   if (IDivFastPath(num, den, &q, rem)) {
     return q;
@@ -398,7 +391,7 @@ int64_t IDivDuration(bool satq, const Duration num, const Duration den,
   return -static_cast<int64_t>(Uint128Low64(quotient128 - 1) & kint64max) - 1;
 }
 
-}  // namespace time_internal
+} // namespace time_internal
 
 //
 // Additive operators.
@@ -408,8 +401,7 @@ Duration& Duration::operator+=(Duration rhs) {
   if (time_internal::IsInfiniteDuration(*this)) return *this;
   if (time_internal::IsInfiniteDuration(rhs)) return *this = rhs;
   const int64_t orig_rep_hi = rep_hi_;
-  rep_hi_ =
-      DecodeTwosComp(EncodeTwosComp(rep_hi_) + EncodeTwosComp(rhs.rep_hi_));
+  rep_hi_ = DecodeTwosComp(EncodeTwosComp(rep_hi_) + EncodeTwosComp(rhs.rep_hi_));
   if (rep_lo_ >= kTicksPerSecond - rhs.rep_lo_) {
     rep_hi_ = DecodeTwosComp(EncodeTwosComp(rep_hi_) + 1);
     rep_lo_ -= kTicksPerSecond;
@@ -427,8 +419,7 @@ Duration& Duration::operator-=(Duration rhs) {
     return *this = rhs.rep_hi_ >= 0 ? -InfiniteDuration() : InfiniteDuration();
   }
   const int64_t orig_rep_hi = rep_hi_;
-  rep_hi_ =
-      DecodeTwosComp(EncodeTwosComp(rep_hi_) - EncodeTwosComp(rhs.rep_hi_));
+  rep_hi_ = DecodeTwosComp(EncodeTwosComp(rep_hi_) - EncodeTwosComp(rhs.rep_hi_));
   if (rep_lo_ < rhs.rep_lo_) {
     rep_hi_ = DecodeTwosComp(EncodeTwosComp(rep_hi_) - 1);
     rep_lo_ += kTicksPerSecond;
@@ -484,18 +475,15 @@ Duration& Duration::operator%=(Duration rhs) {
 double FDivDuration(Duration num, Duration den) {
   // Arithmetic with infinity is sticky.
   if (time_internal::IsInfiniteDuration(num) || den == ZeroDuration()) {
-    return (num < ZeroDuration()) == (den < ZeroDuration())
-               ? std::numeric_limits<double>::infinity()
-               : -std::numeric_limits<double>::infinity();
+    return (num < ZeroDuration()) == (den < ZeroDuration()) ? std::numeric_limits<double>::infinity()
+                                                            : -std::numeric_limits<double>::infinity();
   }
   if (time_internal::IsInfiniteDuration(den)) return 0.0;
 
-  double a =
-      static_cast<double>(time_internal::GetRepHi(num)) * kTicksPerSecond +
-      time_internal::GetRepLo(num);
-  double b =
-      static_cast<double>(time_internal::GetRepHi(den)) * kTicksPerSecond +
-      time_internal::GetRepLo(den);
+  double a
+      = static_cast<double>(time_internal::GetRepHi(num)) * kTicksPerSecond + time_internal::GetRepLo(num);
+  double b
+      = static_cast<double>(time_internal::GetRepHi(den)) * kTicksPerSecond + time_internal::GetRepLo(den);
   return a / b;
 }
 
@@ -503,9 +491,7 @@ double FDivDuration(Duration num, Duration den) {
 // Trunc/Floor/Ceil.
 //
 
-Duration Trunc(Duration d, Duration unit) {
-  return d - (d % unit);
-}
+Duration Trunc(Duration d, Duration unit) { return d - (d % unit); }
 
 Duration Floor(const Duration d, const Duration unit) {
   const absl::Duration td = Trunc(d, unit);
@@ -542,26 +528,23 @@ Duration DurationFromTimeval(timeval tv) {
 //
 
 int64_t ToInt64Nanoseconds(Duration d) {
-  if (time_internal::GetRepHi(d) >= 0 &&
-      time_internal::GetRepHi(d) >> 33 == 0) {
-    return (time_internal::GetRepHi(d) * 1000 * 1000 * 1000) +
-           (time_internal::GetRepLo(d) / kTicksPerNanosecond);
+  if (time_internal::GetRepHi(d) >= 0 && time_internal::GetRepHi(d) >> 33 == 0) {
+    return (time_internal::GetRepHi(d) * 1000 * 1000 * 1000)
+           + (time_internal::GetRepLo(d) / kTicksPerNanosecond);
   }
   return d / Nanoseconds(1);
 }
 int64_t ToInt64Microseconds(Duration d) {
-  if (time_internal::GetRepHi(d) >= 0 &&
-      time_internal::GetRepHi(d) >> 43 == 0) {
-    return (time_internal::GetRepHi(d) * 1000 * 1000) +
-           (time_internal::GetRepLo(d) / (kTicksPerNanosecond * 1000));
+  if (time_internal::GetRepHi(d) >= 0 && time_internal::GetRepHi(d) >> 43 == 0) {
+    return (time_internal::GetRepHi(d) * 1000 * 1000)
+           + (time_internal::GetRepLo(d) / (kTicksPerNanosecond * 1000));
   }
   return d / Microseconds(1);
 }
 int64_t ToInt64Milliseconds(Duration d) {
-  if (time_internal::GetRepHi(d) >= 0 &&
-      time_internal::GetRepHi(d) >> 53 == 0) {
-    return (time_internal::GetRepHi(d) * 1000) +
-           (time_internal::GetRepLo(d) / (kTicksPerNanosecond * 1000 * 1000));
+  if (time_internal::GetRepHi(d) >= 0 && time_internal::GetRepHi(d) >> 53 == 0) {
+    return (time_internal::GetRepHi(d) * 1000)
+           + (time_internal::GetRepLo(d) / (kTicksPerNanosecond * 1000 * 1000));
   }
   return d / Milliseconds(1);
 }
@@ -584,24 +567,12 @@ int64_t ToInt64Hours(Duration d) {
   return hi / (60 * 60);
 }
 
-double ToDoubleNanoseconds(Duration d) {
-  return FDivDuration(d, Nanoseconds(1));
-}
-double ToDoubleMicroseconds(Duration d) {
-  return FDivDuration(d, Microseconds(1));
-}
-double ToDoubleMilliseconds(Duration d) {
-  return FDivDuration(d, Milliseconds(1));
-}
-double ToDoubleSeconds(Duration d) {
-  return FDivDuration(d, Seconds(1));
-}
-double ToDoubleMinutes(Duration d) {
-  return FDivDuration(d, Minutes(1));
-}
-double ToDoubleHours(Duration d) {
-  return FDivDuration(d, Hours(1));
-}
+double ToDoubleNanoseconds(Duration d) { return FDivDuration(d, Nanoseconds(1)); }
+double ToDoubleMicroseconds(Duration d) { return FDivDuration(d, Microseconds(1)); }
+double ToDoubleMilliseconds(Duration d) { return FDivDuration(d, Milliseconds(1)); }
+double ToDoubleSeconds(Duration d) { return FDivDuration(d, Seconds(1)); }
+double ToDoubleMinutes(Duration d) { return FDivDuration(d, Minutes(1)); }
+double ToDoubleHours(Duration d) { return FDivDuration(d, Hours(1)); }
 
 timespec ToTimespec(Duration d) {
   timespec ts;
@@ -618,7 +589,7 @@ timespec ToTimespec(Duration d) {
       }
     }
     ts.tv_sec = rep_hi;
-    if (ts.tv_sec == rep_hi) {  // no time_t narrowing
+    if (ts.tv_sec == rep_hi) { // no time_t narrowing
       ts.tv_nsec = rep_lo / kTicksPerNanosecond;
       return ts;
     }
@@ -646,7 +617,7 @@ timeval ToTimeval(Duration d) {
     }
   }
   tv.tv_sec = ts.tv_sec;
-  if (tv.tv_sec != ts.tv_sec) {  // narrowing
+  if (tv.tv_sec != ts.tv_sec) { // narrowing
     if (ts.tv_sec < 0) {
       tv.tv_sec = std::numeric_limits<decltype(tv.tv_sec)>::min();
       tv.tv_usec = 0;
@@ -656,7 +627,7 @@ timeval ToTimeval(Duration d) {
     }
     return tv;
   }
-  tv.tv_usec = static_cast<int>(ts.tv_nsec / 1000);  // suseconds_t
+  tv.tv_usec = static_cast<int>(ts.tv_nsec / 1000); // suseconds_t
   return tv;
 }
 
@@ -691,9 +662,9 @@ namespace {
 char* Format64(char* ep, int width, int64_t v) {
   do {
     --width;
-    *--ep = '0' + (v % 10);  // contiguous digits
+    *--ep = '0' + (v % 10); // contiguous digits
   } while (v /= 10);
-  while (--width >= 0) *--ep = '0';  // zero pad
+  while (--width >= 0) *--ep = '0'; // zero pad
   return ep;
 }
 
@@ -715,16 +686,15 @@ struct DisplayUnit {
   int prec;
   double pow10;
 };
-ABSL_CONST_INIT const DisplayUnit kDisplayNano = {"ns", 2, 1e2};
-ABSL_CONST_INIT const DisplayUnit kDisplayMicro = {"us", 5, 1e5};
-ABSL_CONST_INIT const DisplayUnit kDisplayMilli = {"ms", 8, 1e8};
-ABSL_CONST_INIT const DisplayUnit kDisplaySec = {"s", 11, 1e11};
-ABSL_CONST_INIT const DisplayUnit kDisplayMin = {"m", -1, 0.0};  // prec ignored
-ABSL_CONST_INIT const DisplayUnit kDisplayHour = {"h", -1,
-                                                  0.0};  // prec ignored
+ABSL_CONST_INIT const DisplayUnit kDisplayNano = { "ns", 2, 1e2 };
+ABSL_CONST_INIT const DisplayUnit kDisplayMicro = { "us", 5, 1e5 };
+ABSL_CONST_INIT const DisplayUnit kDisplayMilli = { "ms", 8, 1e8 };
+ABSL_CONST_INIT const DisplayUnit kDisplaySec = { "s", 11, 1e11 };
+ABSL_CONST_INIT const DisplayUnit kDisplayMin = { "m", -1, 0.0 };  // prec ignored
+ABSL_CONST_INIT const DisplayUnit kDisplayHour = { "h", -1, 0.0 }; // prec ignored
 
 void AppendNumberUnit(std::string* out, int64_t n, DisplayUnit unit) {
-  char buf[sizeof("2562047788015216")];  // hours in max duration
+  char buf[sizeof("2562047788015216")]; // hours in max duration
   char* const ep = buf + sizeof(buf);
   char* bp = Format64(ep, 0, n);
   if (*bp != '0' || bp + 1 != ep) {
@@ -738,13 +708,13 @@ void AppendNumberUnit(std::string* out, int64_t n, DisplayUnit unit) {
 void AppendNumberUnit(std::string* out, double n, DisplayUnit unit) {
   constexpr int kBufferSize = std::numeric_limits<double>::digits10;
   const int prec = std::min(kBufferSize, unit.prec);
-  char buf[kBufferSize];  // also large enough to hold integer part
+  char buf[kBufferSize]; // also large enough to hold integer part
   char* ep = buf + sizeof(buf);
   double d = 0;
   int64_t frac_part = Round(std::modf(n, &d) * unit.pow10);
   int64_t int_part = d;
   if (int_part != 0 || frac_part != 0) {
-    char* bp = Format64(ep, 0, int_part);  // always < 1000
+    char* bp = Format64(ep, 0, int_part); // always < 1000
     out->append(bp, ep - bp);
     if (frac_part != 0) {
       out->push_back('.');
@@ -756,7 +726,7 @@ void AppendNumberUnit(std::string* out, double n, DisplayUnit unit) {
   }
 }
 
-}  // namespace
+} // namespace
 
 // From Go's doc at https://golang.org/pkg/time/#Duration.String
 //   [FormatDuration] returns a string representing the duration in the
@@ -805,14 +775,14 @@ namespace {
 // A helper for ParseDuration() that parses a leading number from the given
 // string and stores the result in *int_part/*frac_part/*frac_scale.  The
 // given string pointer is modified to point to the first unconsumed char.
-bool ConsumeDurationNumber(const char** dpp, const char* ep, int64_t* int_part,
-                           int64_t* frac_part, int64_t* frac_scale) {
+bool ConsumeDurationNumber(
+    const char** dpp, const char* ep, int64_t* int_part, int64_t* frac_part, int64_t* frac_scale) {
   *int_part = 0;
   *frac_part = 0;
-  *frac_scale = 1;  // invariant: *frac_part < *frac_scale
+  *frac_scale = 1; // invariant: *frac_part < *frac_scale
   const char* start = *dpp;
   for (; *dpp != ep; *dpp += 1) {
-    const int d = **dpp - '0';  // contiguous digits
+    const int d = **dpp - '0'; // contiguous digits
     if (d < 0 || 10 <= d) break;
 
     if (*int_part > kint64max / 10) return false;
@@ -824,7 +794,7 @@ bool ConsumeDurationNumber(const char** dpp, const char* ep, int64_t* int_part,
   if (*dpp == ep || **dpp != '.') return !int_part_empty;
 
   for (*dpp += 1; *dpp != ep; *dpp += 1) {
-    const int d = **dpp - '0';  // contiguous digits
+    const int d = **dpp - '0'; // contiguous digits
     if (d < 0 || 10 <= d) break;
     if (*frac_scale <= kint64max / 10) {
       *frac_part *= 10;
@@ -891,7 +861,7 @@ bool ConsumeDurationUnit(const char** start, const char* end, Duration* unit) {
   }
 }
 
-}  // namespace
+} // namespace
 
 // From Go's doc at https://golang.org/pkg/time/#ParseDuration
 //   [ParseDuration] parses a duration string. A duration string is
@@ -927,9 +897,8 @@ bool ParseDuration(absl::string_view dur_sv, Duration* d) {
     int64_t frac_part;
     int64_t frac_scale;
     Duration unit;
-    if (!ConsumeDurationNumber(&start, end, &int_part, &frac_part,
-                               &frac_scale) ||
-        !ConsumeDurationUnit(&start, end, &unit)) {
+    if (!ConsumeDurationNumber(&start, end, &int_part, &frac_part, &frac_scale)
+        || !ConsumeDurationUnit(&start, end, &unit)) {
       return false;
     }
     if (int_part != 0) dur += sign * int_part * unit;
@@ -939,16 +908,12 @@ bool ParseDuration(absl::string_view dur_sv, Duration* d) {
   return true;
 }
 
-bool AbslParseFlag(absl::string_view text, Duration* dst, std::string*) {
-  return ParseDuration(text, dst);
-}
+bool AbslParseFlag(absl::string_view text, Duration* dst, std::string*) { return ParseDuration(text, dst); }
 
 std::string AbslUnparseFlag(Duration d) { return FormatDuration(d); }
-bool ParseFlag(const std::string& text, Duration* dst, std::string* ) {
-  return ParseDuration(text, dst);
-}
+bool ParseFlag(const std::string& text, Duration* dst, std::string*) { return ParseDuration(text, dst); }
 
 std::string UnparseFlag(Duration d) { return FormatDuration(d); }
 
 ABSL_NAMESPACE_END
-}  // namespace absl
+} // namespace absl

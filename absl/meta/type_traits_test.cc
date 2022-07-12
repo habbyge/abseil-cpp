@@ -36,7 +36,7 @@ struct Dummy {};
 
 struct ReturnType {};
 struct ConvertibleToReturnType {
-  operator ReturnType() const;  // NOLINT
+  operator ReturnType() const; // NOLINT
 };
 
 // Unique types used as parameter types for testing the detection idiom.
@@ -45,70 +45,53 @@ struct StructB {};
 struct StructC {};
 
 struct TypeWithBarFunction {
-  template <class T,
-            absl::enable_if_t<std::is_same<T&&, StructA&>::value, int> = 0>
-  ReturnType bar(T&&, const StructB&, StructC&&) &&;  // NOLINT
+  template<class T, absl::enable_if_t<std::is_same<T&&, StructA&>::value, int> = 0>
+  ReturnType bar(T&&, const StructB&, StructC&&) &&; // NOLINT
 };
 
 struct TypeWithBarFunctionAndConvertibleReturnType {
-  template <class T,
-            absl::enable_if_t<std::is_same<T&&, StructA&>::value, int> = 0>
-  ConvertibleToReturnType bar(T&&, const StructB&, StructC&&) &&;  // NOLINT
+  template <class T, absl::enable_if_t<std::is_same<T&&, StructA&>::value, int> = 0>
+  ConvertibleToReturnType bar(T&&, const StructB&, StructC&&) &&; // NOLINT
 };
 
 template <class Class, class... Ts>
-using BarIsCallableImpl =
-    decltype(std::declval<Class>().bar(std::declval<Ts>()...));
+using BarIsCallableImpl = decltype(std::declval<Class>().bar(std::declval<Ts>()...));
 
 template <class Class, class... T>
-using BarIsCallable =
-    absl::type_traits_internal::is_detected<BarIsCallableImpl, Class, T...>;
+using BarIsCallable = absl::type_traits_internal::is_detected<BarIsCallableImpl, Class, T...>;
 
 template <class Class, class... T>
-using BarIsCallableConv = absl::type_traits_internal::is_detected_convertible<
-    ReturnType, BarIsCallableImpl, Class, T...>;
+using BarIsCallableConv
+    = absl::type_traits_internal::is_detected_convertible<ReturnType, BarIsCallableImpl, Class, T...>;
 
 // NOTE: Test of detail type_traits_internal::is_detected.
 TEST(IsDetectedTest, BasicUsage) {
-  EXPECT_TRUE((BarIsCallable<TypeWithBarFunction, StructA&, const StructB&,
-                             StructC>::value));
-  EXPECT_TRUE(
-      (BarIsCallable<TypeWithBarFunction, StructA&, StructB&, StructC>::value));
-  EXPECT_TRUE(
-      (BarIsCallable<TypeWithBarFunction, StructA&, StructB, StructC>::value));
+  EXPECT_TRUE((BarIsCallable<TypeWithBarFunction, StructA&, const StructB&, StructC>::value));
+  EXPECT_TRUE((BarIsCallable<TypeWithBarFunction, StructA&, StructB&, StructC>::value));
+  EXPECT_TRUE((BarIsCallable<TypeWithBarFunction, StructA&, StructB, StructC>::value));
 
   EXPECT_FALSE((BarIsCallable<int, StructA&, const StructB&, StructC>::value));
-  EXPECT_FALSE((BarIsCallable<TypeWithBarFunction&, StructA&, const StructB&,
-                              StructC>::value));
-  EXPECT_FALSE((BarIsCallable<TypeWithBarFunction, StructA, const StructB&,
-                              StructC>::value));
+  EXPECT_FALSE((BarIsCallable<TypeWithBarFunction&, StructA&, const StructB&, StructC>::value));
+  EXPECT_FALSE((BarIsCallable<TypeWithBarFunction, StructA, const StructB&, StructC>::value));
 }
 
 // NOTE: Test of detail type_traits_internal::is_detected_convertible.
 TEST(IsDetectedConvertibleTest, BasicUsage) {
-  EXPECT_TRUE((BarIsCallableConv<TypeWithBarFunction, StructA&, const StructB&,
-                                 StructC>::value));
-  EXPECT_TRUE((BarIsCallableConv<TypeWithBarFunction, StructA&, StructB&,
-                                 StructC>::value));
-  EXPECT_TRUE((BarIsCallableConv<TypeWithBarFunction, StructA&, StructB,
-                                 StructC>::value));
-  EXPECT_TRUE((BarIsCallableConv<TypeWithBarFunctionAndConvertibleReturnType,
-                                 StructA&, const StructB&, StructC>::value));
-  EXPECT_TRUE((BarIsCallableConv<TypeWithBarFunctionAndConvertibleReturnType,
-                                 StructA&, StructB&, StructC>::value));
-  EXPECT_TRUE((BarIsCallableConv<TypeWithBarFunctionAndConvertibleReturnType,
-                                 StructA&, StructB, StructC>::value));
+  EXPECT_TRUE((BarIsCallableConv<TypeWithBarFunction, StructA&, const StructB&, StructC>::value));
+  EXPECT_TRUE((BarIsCallableConv<TypeWithBarFunction, StructA&, StructB&, StructC>::value));
+  EXPECT_TRUE((BarIsCallableConv<TypeWithBarFunction, StructA&, StructB, StructC>::value));
+  EXPECT_TRUE(
+      (BarIsCallableConv<TypeWithBarFunctionAndConvertibleReturnType, StructA&, const StructB&, StructC>::value));
+  EXPECT_TRUE((BarIsCallableConv<TypeWithBarFunctionAndConvertibleReturnType, StructA&, StructB&, StructC>::value));
+  EXPECT_TRUE((BarIsCallableConv<TypeWithBarFunctionAndConvertibleReturnType, StructA&, StructB, StructC>::value));
 
+  EXPECT_FALSE((BarIsCallableConv<int, StructA&, const StructB&, StructC>::value));
+  EXPECT_FALSE((BarIsCallableConv<TypeWithBarFunction&, StructA&, const StructB&, StructC>::value));
+  EXPECT_FALSE((BarIsCallableConv<TypeWithBarFunction, StructA, const StructB&, StructC>::value));
   EXPECT_FALSE(
-      (BarIsCallableConv<int, StructA&, const StructB&, StructC>::value));
-  EXPECT_FALSE((BarIsCallableConv<TypeWithBarFunction&, StructA&,
-                                  const StructB&, StructC>::value));
-  EXPECT_FALSE((BarIsCallableConv<TypeWithBarFunction, StructA, const StructB&,
-                                  StructC>::value));
-  EXPECT_FALSE((BarIsCallableConv<TypeWithBarFunctionAndConvertibleReturnType&,
-                                  StructA&, const StructB&, StructC>::value));
-  EXPECT_FALSE((BarIsCallableConv<TypeWithBarFunctionAndConvertibleReturnType,
-                                  StructA, const StructB&, StructC>::value));
+      (BarIsCallableConv<TypeWithBarFunctionAndConvertibleReturnType&, StructA&, const StructB&, StructC>::value));
+  EXPECT_FALSE(
+      (BarIsCallableConv<TypeWithBarFunctionAndConvertibleReturnType, StructA, const StructB&, StructC>::value));
 }
 
 TEST(VoidTTest, BasicUsage) {
@@ -134,14 +117,9 @@ struct MyFalseType {
 };
 
 TEST(ConjunctionTest, ShortCircuiting) {
-  EXPECT_FALSE(
-      (absl::conjunction<std::true_type, std::false_type, Dummy>::value));
-  EXPECT_TRUE((std::is_base_of<MyFalseType,
-                               absl::conjunction<std::true_type, MyFalseType,
-                                                 std::false_type>>::value));
-  EXPECT_TRUE(
-      (std::is_base_of<MyTrueType,
-                       absl::conjunction<std::true_type, MyTrueType>>::value));
+  EXPECT_FALSE((absl::conjunction<std::true_type, std::false_type, Dummy>::value));
+  EXPECT_TRUE((std::is_base_of<MyFalseType, absl::conjunction<std::true_type, MyFalseType, std::false_type>>::value));
+  EXPECT_TRUE((std::is_base_of<MyTrueType, absl::conjunction<std::true_type, MyTrueType>>::value));
 }
 
 TEST(DisjunctionTest, BasicBooleanLogic) {
@@ -154,14 +132,9 @@ TEST(DisjunctionTest, BasicBooleanLogic) {
 }
 
 TEST(DisjunctionTest, ShortCircuiting) {
-  EXPECT_TRUE(
-      (absl::disjunction<std::false_type, std::true_type, Dummy>::value));
-  EXPECT_TRUE((
-      std::is_base_of<MyTrueType, absl::disjunction<std::false_type, MyTrueType,
-                                                    std::true_type>>::value));
-  EXPECT_TRUE((
-      std::is_base_of<MyFalseType,
-                      absl::disjunction<std::false_type, MyFalseType>>::value));
+  EXPECT_TRUE((absl::disjunction<std::false_type, std::true_type, Dummy>::value));
+  EXPECT_TRUE((std::is_base_of<MyTrueType, absl::disjunction<std::false_type, MyTrueType, std::true_type>>::value));
+  EXPECT_TRUE((std::is_base_of<MyFalseType, absl::disjunction<std::false_type, MyFalseType>>::value));
 }
 
 TEST(NegationTest, BasicBooleanLogic) {
@@ -275,7 +248,7 @@ class TrivialMoveAssign {
   explicit TrivialMoveAssign(int n) : n_(n) {}
   TrivialMoveAssign(const TrivialMoveAssign& t) : n_(t.n_) {}
   TrivialMoveAssign& operator=(TrivialMoveAssign&&) = default;
-  ~TrivialMoveAssign() {}  // can have nontrivial destructor
+  ~TrivialMoveAssign() {} // can have nontrivial destructor
  private:
   int n_;
 };
@@ -298,7 +271,7 @@ class TrivialCopyAssign {
   explicit TrivialCopyAssign(int n) : n_(n) {}
   TrivialCopyAssign(const TrivialCopyAssign& t) : n_(t.n_) {}
   TrivialCopyAssign& operator=(const TrivialCopyAssign& t) = default;
-  ~TrivialCopyAssign() {}  // can have nontrivial destructor
+  ~TrivialCopyAssign() {} // can have nontrivial destructor
  private:
   int n_;
 };
@@ -354,7 +327,7 @@ class Base {
 // CWG issue 1734: http://open-std.org/JTC1/SC22/WG21/docs/cwg_defects.html#1734
 // CWG issue 1928: http://open-std.org/JTC1/SC22/WG21/docs/cwg_closed.html#1928
 #if !defined(_LIBCPP_VERSION) || _LIBCPP_VERSION >= 3700
-#define ABSL_TRIVIALLY_DESTRUCTIBLE_CONSIDER_DELETED_DESTRUCTOR_NOT_TRIVIAL 1
+  #define ABSL_TRIVIALLY_DESTRUCTIBLE_CONSIDER_DELETED_DESTRUCTOR_NOT_TRIVIAL 1
 #endif
 
 // As of the moment, GCC versions >5.1 have a problem compiling for
@@ -365,9 +338,8 @@ class Base {
 // have any problems.
 // Compiler Explorer: https://godbolt.org/g/dXRbdK
 // GCC bug 83689: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=83689
-#if defined(__clang__) || defined(_MSC_VER) || \
-    (defined(__GNUC__) && __GNUC__ < 5)
-#define ABSL_GCC_BUG_TRIVIALLY_CONSTRUCTIBLE_ON_ARRAY_OF_NONTRIVIAL 1
+#if defined(__clang__) || defined(_MSC_VER) || (defined(__GNUC__) && __GNUC__ < 5)
+  #define ABSL_GCC_BUG_TRIVIALLY_CONSTRUCTIBLE_ON_ARRAY_OF_NONTRIVIAL 1
 #endif
 
 TEST(TypeTraitsTest, TestIsFunction) {
@@ -380,8 +352,8 @@ TEST(TypeTraitsTest, TestIsFunction) {
   EXPECT_TRUE(absl::is_function<void() noexcept>::value);
   EXPECT_TRUE(absl::is_function<void(...) noexcept>::value);
 
-  EXPECT_FALSE(absl::is_function<void(*)()>::value);
-  EXPECT_FALSE(absl::is_function<void(&)()>::value);
+  EXPECT_FALSE(absl::is_function<void (*)()>::value);
+  EXPECT_FALSE(absl::is_function<void (&)()>::value);
   EXPECT_FALSE(absl::is_function<int>::value);
   EXPECT_FALSE(absl::is_function<Callable>::value);
 }
@@ -422,8 +394,7 @@ TEST(TypeTraitsTest, TestTrivialDestructor) {
 
   // simple_pair of such types is trivial
   EXPECT_TRUE((absl::is_trivially_destructible<simple_pair<int, int>>::value));
-  EXPECT_TRUE((absl::is_trivially_destructible<
-               simple_pair<Trivial, TrivialDestructor>>::value));
+  EXPECT_TRUE((absl::is_trivially_destructible<simple_pair<Trivial, TrivialDestructor>>::value));
 
   // Verify that types without trivial destructors are correctly marked as such.
   EXPECT_FALSE(absl::is_trivially_destructible<std::string>::value);
@@ -431,10 +402,8 @@ TEST(TypeTraitsTest, TestTrivialDestructor) {
 
   // Verify that simple_pairs of types without trivial destructors
   // are not marked as trivial.
-  EXPECT_FALSE((absl::is_trivially_destructible<
-                simple_pair<int, std::string>>::value));
-  EXPECT_FALSE((absl::is_trivially_destructible<
-                simple_pair<std::string, int>>::value));
+  EXPECT_FALSE((absl::is_trivially_destructible<simple_pair<int, std::string>>::value));
+  EXPECT_FALSE((absl::is_trivially_destructible<simple_pair<std::string, int>>::value));
 
   // array of such types is trivial
   using int10 = int[10];
@@ -467,50 +436,39 @@ TEST(TypeTraitsTest, TestTrivialDefaultCtor) {
   EXPECT_TRUE(absl::is_trivially_default_constructible<long double>::value);
   EXPECT_TRUE(absl::is_trivially_default_constructible<std::string*>::value);
   EXPECT_TRUE(absl::is_trivially_default_constructible<Trivial*>::value);
-  EXPECT_TRUE(
-      absl::is_trivially_default_constructible<const std::string*>::value);
+  EXPECT_TRUE(absl::is_trivially_default_constructible<const std::string*>::value);
   EXPECT_TRUE(absl::is_trivially_default_constructible<const Trivial*>::value);
   EXPECT_TRUE(absl::is_trivially_default_constructible<std::string**>::value);
   EXPECT_TRUE(absl::is_trivially_default_constructible<Trivial**>::value);
 
   // types with compiler generated default ctors
   EXPECT_TRUE(absl::is_trivially_default_constructible<Trivial>::value);
-  EXPECT_TRUE(
-      absl::is_trivially_default_constructible<TrivialDefaultCtor>::value);
+  EXPECT_TRUE(absl::is_trivially_default_constructible<TrivialDefaultCtor>::value);
 
   // Verify that types without them are not.
-  EXPECT_FALSE(
-      absl::is_trivially_default_constructible<NontrivialDefaultCtor>::value);
-  EXPECT_FALSE(
-      absl::is_trivially_default_constructible<DeletedDefaultCtor>::value);
+  EXPECT_FALSE(absl::is_trivially_default_constructible<NontrivialDefaultCtor>::value);
+  EXPECT_FALSE(absl::is_trivially_default_constructible<DeletedDefaultCtor>::value);
 
   // types with nontrivial destructor are nontrivial
-  EXPECT_FALSE(
-      absl::is_trivially_default_constructible<NontrivialDestructor>::value);
+  EXPECT_FALSE(absl::is_trivially_default_constructible<NontrivialDestructor>::value);
 
   // types with vtables
   EXPECT_FALSE(absl::is_trivially_default_constructible<Base>::value);
 
   // Verify that simple_pair has trivial constructors where applicable.
-  EXPECT_TRUE((absl::is_trivially_default_constructible<
-               simple_pair<int, char*>>::value));
-  EXPECT_TRUE((absl::is_trivially_default_constructible<
-               simple_pair<int, Trivial>>::value));
-  EXPECT_TRUE((absl::is_trivially_default_constructible<
-               simple_pair<int, TrivialDefaultCtor>>::value));
+  EXPECT_TRUE((absl::is_trivially_default_constructible<simple_pair<int, char*>>::value));
+  EXPECT_TRUE((absl::is_trivially_default_constructible<simple_pair<int, Trivial>>::value));
+  EXPECT_TRUE((absl::is_trivially_default_constructible<simple_pair<int, TrivialDefaultCtor>>::value));
 
   // Verify that types without trivial constructors are
   // correctly marked as such.
   EXPECT_FALSE(absl::is_trivially_default_constructible<std::string>::value);
-  EXPECT_FALSE(
-      absl::is_trivially_default_constructible<std::vector<int>>::value);
+  EXPECT_FALSE(absl::is_trivially_default_constructible<std::vector<int>>::value);
 
   // Verify that simple_pairs of types without trivial constructors
   // are not marked as trivial.
-  EXPECT_FALSE((absl::is_trivially_default_constructible<
-                simple_pair<int, std::string>>::value));
-  EXPECT_FALSE((absl::is_trivially_default_constructible<
-                simple_pair<std::string, int>>::value));
+  EXPECT_FALSE((absl::is_trivially_default_constructible<simple_pair<int, std::string>>::value));
+  EXPECT_FALSE((absl::is_trivially_default_constructible<simple_pair<std::string, int>>::value));
 
   // Verify that arrays of such types are trivially default constructible
   using int10 = int[10];
@@ -518,14 +476,12 @@ TEST(TypeTraitsTest, TestTrivialDefaultCtor) {
   using Trivial10 = Trivial[10];
   EXPECT_TRUE(absl::is_trivially_default_constructible<Trivial10>::value);
   using TrivialDefaultCtor10 = TrivialDefaultCtor[10];
-  EXPECT_TRUE(
-      absl::is_trivially_default_constructible<TrivialDefaultCtor10>::value);
+  EXPECT_TRUE(absl::is_trivially_default_constructible<TrivialDefaultCtor10>::value);
 
   // Conversely, the opposite also holds.
 #ifdef ABSL_GCC_BUG_TRIVIALLY_CONSTRUCTIBLE_ON_ARRAY_OF_NONTRIVIAL
   using NontrivialDefaultCtor10 = NontrivialDefaultCtor[10];
-  EXPECT_FALSE(
-      absl::is_trivially_default_constructible<NontrivialDefaultCtor10>::value);
+  EXPECT_FALSE(absl::is_trivially_default_constructible<NontrivialDefaultCtor10>::value);
 #endif
 }
 
@@ -536,11 +492,17 @@ TEST(TypeTraitsTest, TestTrivialDefaultCtor) {
 
 template <class T>
 struct BadConstructors {
-  BadConstructors() { static_assert(T::value, ""); }
+  BadConstructors() {
+    static_assert(T::value, "");
+  }
 
-  BadConstructors(BadConstructors&&) { static_assert(T::value, ""); }
+  BadConstructors(BadConstructors&&) {
+    static_assert(T::value, "");
+  }
 
-  BadConstructors(const BadConstructors&) { static_assert(T::value, ""); }
+  BadConstructors(const BadConstructors&) {
+    static_assert(T::value, "");
+  }
 };
 
 TEST(TypeTraitsTest, TestTrivialityBadConstructors) {
@@ -584,26 +546,20 @@ TEST(TypeTraitsTest, TestTrivialMoveCtor) {
   EXPECT_TRUE(absl::is_trivially_move_constructible<TrivialMoveCtor>::value);
 
   // Verify that types without them (i.e. nontrivial or deleted) are not.
-  EXPECT_FALSE(
-      absl::is_trivially_move_constructible<NontrivialCopyCtor>::value);
+  EXPECT_FALSE(absl::is_trivially_move_constructible<NontrivialCopyCtor>::value);
   EXPECT_FALSE(absl::is_trivially_move_constructible<DeletedCopyCtor>::value);
-  EXPECT_FALSE(
-      absl::is_trivially_move_constructible<NonCopyableOrMovable>::value);
+  EXPECT_FALSE(absl::is_trivially_move_constructible<NonCopyableOrMovable>::value);
 
   // type with nontrivial destructor are nontrivial move construbtible
-  EXPECT_FALSE(
-      absl::is_trivially_move_constructible<NontrivialDestructor>::value);
+  EXPECT_FALSE(absl::is_trivially_move_constructible<NontrivialDestructor>::value);
 
   // types with vtables
   EXPECT_FALSE(absl::is_trivially_move_constructible<Base>::value);
 
   // Verify that simple_pair of such types is trivially move constructible
-  EXPECT_TRUE(
-      (absl::is_trivially_move_constructible<simple_pair<int, char*>>::value));
-  EXPECT_TRUE((
-      absl::is_trivially_move_constructible<simple_pair<int, Trivial>>::value));
-  EXPECT_TRUE((absl::is_trivially_move_constructible<
-               simple_pair<int, TrivialMoveCtor>>::value));
+  EXPECT_TRUE((absl::is_trivially_move_constructible<simple_pair<int, char*>>::value));
+  EXPECT_TRUE((absl::is_trivially_move_constructible<simple_pair<int, Trivial>>::value));
+  EXPECT_TRUE((absl::is_trivially_move_constructible<simple_pair<int, TrivialMoveCtor>>::value));
 
   // Verify that types without trivial move constructors are
   // correctly marked as such.
@@ -612,10 +568,8 @@ TEST(TypeTraitsTest, TestTrivialMoveCtor) {
 
   // Verify that simple_pairs of types without trivial move constructors
   // are not marked as trivial.
-  EXPECT_FALSE((absl::is_trivially_move_constructible<
-                simple_pair<int, std::string>>::value));
-  EXPECT_FALSE((absl::is_trivially_move_constructible<
-                simple_pair<std::string, int>>::value));
+  EXPECT_FALSE((absl::is_trivially_move_constructible<simple_pair<int, std::string>>::value));
+  EXPECT_FALSE((absl::is_trivially_move_constructible<simple_pair<std::string, int>>::value));
 
   // Verify that arrays are not
   using int10 = int[10];
@@ -655,28 +609,21 @@ TEST(TypeTraitsTest, TestTrivialCopyCtor) {
   EXPECT_TRUE(absl::is_trivially_copy_constructible<TrivialCopyCtor>::value);
 
   // Verify that types without them (i.e. nontrivial or deleted) are not.
-  EXPECT_FALSE(
-      absl::is_trivially_copy_constructible<NontrivialCopyCtor>::value);
+  EXPECT_FALSE(absl::is_trivially_copy_constructible<NontrivialCopyCtor>::value);
   EXPECT_FALSE(absl::is_trivially_copy_constructible<DeletedCopyCtor>::value);
-  EXPECT_FALSE(
-      absl::is_trivially_copy_constructible<MovableNonCopyable>::value);
-  EXPECT_FALSE(
-      absl::is_trivially_copy_constructible<NonCopyableOrMovable>::value);
+  EXPECT_FALSE(absl::is_trivially_copy_constructible<MovableNonCopyable>::value);
+  EXPECT_FALSE(absl::is_trivially_copy_constructible<NonCopyableOrMovable>::value);
 
   // type with nontrivial destructor are nontrivial copy construbtible
-  EXPECT_FALSE(
-      absl::is_trivially_copy_constructible<NontrivialDestructor>::value);
+  EXPECT_FALSE(absl::is_trivially_copy_constructible<NontrivialDestructor>::value);
 
   // types with vtables
   EXPECT_FALSE(absl::is_trivially_copy_constructible<Base>::value);
 
   // Verify that simple_pair of such types is trivially copy constructible
-  EXPECT_TRUE(
-      (absl::is_trivially_copy_constructible<simple_pair<int, char*>>::value));
-  EXPECT_TRUE((
-      absl::is_trivially_copy_constructible<simple_pair<int, Trivial>>::value));
-  EXPECT_TRUE((absl::is_trivially_copy_constructible<
-               simple_pair<int, TrivialCopyCtor>>::value));
+  EXPECT_TRUE((absl::is_trivially_copy_constructible<simple_pair<int, char*>>::value));
+  EXPECT_TRUE((absl::is_trivially_copy_constructible<simple_pair<int, Trivial>>::value));
+  EXPECT_TRUE((absl::is_trivially_copy_constructible<simple_pair<int, TrivialCopyCtor>>::value));
 
   // Verify that types without trivial copy constructors are
   // correctly marked as such.
@@ -685,10 +632,8 @@ TEST(TypeTraitsTest, TestTrivialCopyCtor) {
 
   // Verify that simple_pairs of types without trivial copy constructors
   // are not marked as trivial.
-  EXPECT_FALSE((absl::is_trivially_copy_constructible<
-                simple_pair<int, std::string>>::value));
-  EXPECT_FALSE((absl::is_trivially_copy_constructible<
-                simple_pair<std::string, int>>::value));
+  EXPECT_FALSE((absl::is_trivially_copy_constructible<simple_pair<int, std::string>>::value));
+  EXPECT_FALSE((absl::is_trivially_copy_constructible<simple_pair<std::string, int>>::value));
 
   // Verify that arrays are not
   using int10 = int[10];
@@ -735,12 +680,9 @@ TEST(TypeTraitsTest, TestTrivialMoveAssign) {
   EXPECT_FALSE(absl::is_trivially_move_assignable<Base>::value);
 
   // Verify that simple_pair is trivially assignable
-  EXPECT_TRUE(
-      (absl::is_trivially_move_assignable<simple_pair<int, char*>>::value));
-  EXPECT_TRUE(
-      (absl::is_trivially_move_assignable<simple_pair<int, Trivial>>::value));
-  EXPECT_TRUE((absl::is_trivially_move_assignable<
-               simple_pair<int, TrivialMoveAssign>>::value));
+  EXPECT_TRUE((absl::is_trivially_move_assignable<simple_pair<int, char*>>::value));
+  EXPECT_TRUE((absl::is_trivially_move_assignable<simple_pair<int, Trivial>>::value));
+  EXPECT_TRUE((absl::is_trivially_move_assignable<simple_pair<int, TrivialMoveAssign>>::value));
 
   // Verify that types not trivially move assignable are
   // correctly marked as such.
@@ -749,10 +691,8 @@ TEST(TypeTraitsTest, TestTrivialMoveAssign) {
 
   // Verify that simple_pairs of types not trivially move assignable
   // are not marked as trivial.
-  EXPECT_FALSE((absl::is_trivially_move_assignable<
-                simple_pair<int, std::string>>::value));
-  EXPECT_FALSE((absl::is_trivially_move_assignable<
-                simple_pair<std::string, int>>::value));
+  EXPECT_FALSE((absl::is_trivially_move_assignable<simple_pair<int, std::string>>::value));
+  EXPECT_FALSE((absl::is_trivially_move_assignable<simple_pair<std::string, int>>::value));
 
   // Verify that arrays are not trivially move assignable
   using int10 = int[10];
@@ -804,12 +744,9 @@ TEST(TypeTraitsTest, TestTrivialCopyAssign) {
   EXPECT_FALSE(absl::is_trivially_copy_assignable<Base>::value);
 
   // Verify that simple_pair is trivially assignable
-  EXPECT_TRUE(
-      (absl::is_trivially_copy_assignable<simple_pair<int, char*>>::value));
-  EXPECT_TRUE(
-      (absl::is_trivially_copy_assignable<simple_pair<int, Trivial>>::value));
-  EXPECT_TRUE((absl::is_trivially_copy_assignable<
-               simple_pair<int, TrivialCopyAssign>>::value));
+  EXPECT_TRUE((absl::is_trivially_copy_assignable<simple_pair<int, char*>>::value));
+  EXPECT_TRUE((absl::is_trivially_copy_assignable<simple_pair<int, Trivial>>::value));
+  EXPECT_TRUE((absl::is_trivially_copy_assignable<simple_pair<int, TrivialCopyAssign>>::value));
 
   // Verify that types not trivially copy assignable are
   // correctly marked as such.
@@ -818,10 +755,8 @@ TEST(TypeTraitsTest, TestTrivialCopyAssign) {
 
   // Verify that simple_pairs of types not trivially copy assignable
   // are not marked as trivial.
-  EXPECT_FALSE((absl::is_trivially_copy_assignable<
-                simple_pair<int, std::string>>::value));
-  EXPECT_FALSE((absl::is_trivially_copy_assignable<
-                simple_pair<std::string, int>>::value));
+  EXPECT_FALSE((absl::is_trivially_copy_assignable<simple_pair<int, std::string>>::value));
+  EXPECT_FALSE((absl::is_trivially_copy_assignable<simple_pair<std::string, int>>::value));
 
   // Verify that arrays are not trivially copy assignable
   using int10 = int[10];
@@ -836,59 +771,38 @@ TEST(TypeTraitsTest, TestTriviallyCopyable) {
   // Verify that arithmetic types and pointers are trivially copyable.
   EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<bool>::value);
   EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<char>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<unsigned char>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<signed char>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<wchar_t>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<unsigned char>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<signed char>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<wchar_t>::value);
   EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<int>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<unsigned int>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<int16_t>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<uint16_t>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<int64_t>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<uint64_t>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<unsigned int>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<int16_t>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<uint16_t>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<int64_t>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<uint64_t>::value);
   EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<float>::value);
   EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<double>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<long double>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<std::string*>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<Trivial*>::value);
-  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<
-              const std::string*>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<const Trivial*>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<std::string**>::value);
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<Trivial**>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<long double>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<std::string*>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<Trivial*>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<const std::string*>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<const Trivial*>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<std::string**>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<Trivial**>::value);
 
   // const qualified types are not assignable but are constructible
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<const int>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<const int>::value);
 
   // Trivial copy constructor/assignment and destructor.
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<Trivial>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<Trivial>::value);
   // Trivial copy assignment, but non-trivial copy constructor/destructor.
-  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<
-               TrivialCopyAssign>::value);
+  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<TrivialCopyAssign>::value);
   // Trivial copy constructor, but non-trivial assignment.
-  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<
-               TrivialCopyCtor>::value);
+  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<TrivialCopyCtor>::value);
 
   // Types with a non-trivial copy constructor/assignment
-  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<
-               NontrivialCopyCtor>::value);
-  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<
-               NontrivialCopyAssign>::value);
+  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<NontrivialCopyCtor>::value);
+  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<NontrivialCopyAssign>::value);
 
   // Types without copy constructor/assignment, but with move
   // MSVC disagrees with other compilers about this:
@@ -896,83 +810,58 @@ TEST(TypeTraitsTest, TestTriviallyCopyable) {
   //             MovableNonCopyable>::value);
 
   // Types without copy/move constructor/assignment
-  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<
-               NonCopyableOrMovable>::value);
+  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<NonCopyableOrMovable>::value);
 
   // No copy assign, but has trivial copy constructor.
-  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<
-              DeletedCopyAssign>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<DeletedCopyAssign>::value);
 
   // types with vtables
   EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<Base>::value);
 
   // Verify that simple_pair is trivially copyable if members are
-  EXPECT_TRUE((absl::type_traits_internal::is_trivially_copyable<
-               simple_pair<int, char*>>::value));
-  EXPECT_TRUE((absl::type_traits_internal::is_trivially_copyable<
-               simple_pair<int, Trivial>>::value));
+  EXPECT_TRUE((absl::type_traits_internal::is_trivially_copyable<simple_pair<int, char*>>::value));
+  EXPECT_TRUE((absl::type_traits_internal::is_trivially_copyable<simple_pair<int, Trivial>>::value));
 
   // Verify that types not trivially copyable are
   // correctly marked as such.
-  EXPECT_FALSE(
-      absl::type_traits_internal::is_trivially_copyable<std::string>::value);
-  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<
-               std::vector<int>>::value);
+  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<std::string>::value);
+  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<std::vector<int>>::value);
 
   // Verify that simple_pairs of types not trivially copyable
   // are not marked as trivial.
-  EXPECT_FALSE((absl::type_traits_internal::is_trivially_copyable<
-                simple_pair<int, std::string>>::value));
-  EXPECT_FALSE((absl::type_traits_internal::is_trivially_copyable<
-                simple_pair<std::string, int>>::value));
-  EXPECT_FALSE((absl::type_traits_internal::is_trivially_copyable<
-                simple_pair<int, TrivialCopyAssign>>::value));
+  EXPECT_FALSE((absl::type_traits_internal::is_trivially_copyable<simple_pair<int, std::string>>::value));
+  EXPECT_FALSE((absl::type_traits_internal::is_trivially_copyable<simple_pair<std::string, int>>::value));
+  EXPECT_FALSE((absl::type_traits_internal::is_trivially_copyable<simple_pair<int, TrivialCopyAssign>>::value));
 
   // Verify that arrays of trivially copyable types are trivially copyable
   using int10 = int[10];
   EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<int10>::value);
   using int10x10 = int[10][10];
-  EXPECT_TRUE(
-      absl::type_traits_internal::is_trivially_copyable<int10x10>::value);
+  EXPECT_TRUE(absl::type_traits_internal::is_trivially_copyable<int10x10>::value);
 
   // Verify that references are handled correctly
-  EXPECT_FALSE(
-      absl::type_traits_internal::is_trivially_copyable<Trivial&&>::value);
-  EXPECT_FALSE(
-      absl::type_traits_internal::is_trivially_copyable<Trivial&>::value);
+  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<Trivial&&>::value);
+  EXPECT_FALSE(absl::type_traits_internal::is_trivially_copyable<Trivial&>::value);
 }
 
 TEST(TypeTraitsTest, TestRemoveCVRef) {
-  EXPECT_TRUE(
-      (std::is_same<typename absl::remove_cvref<int>::type, int>::value));
-  EXPECT_TRUE(
-      (std::is_same<typename absl::remove_cvref<int&>::type, int>::value));
-  EXPECT_TRUE(
-      (std::is_same<typename absl::remove_cvref<int&&>::type, int>::value));
-  EXPECT_TRUE((
-      std::is_same<typename absl::remove_cvref<const int&>::type, int>::value));
-  EXPECT_TRUE(
-      (std::is_same<typename absl::remove_cvref<int*>::type, int*>::value));
+  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<int>::type, int>::value));
+  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<int&>::type, int>::value));
+  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<int&&>::type, int>::value));
+  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<const int&>::type, int>::value));
+  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<int*>::type, int*>::value));
   // Does not remove const in this case.
-  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<const int*>::type,
-                            const int*>::value));
-  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<int[2]>::type,
-                            int[2]>::value));
-  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<int(&)[2]>::type,
-                            int[2]>::value));
-  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<int(&&)[2]>::type,
-                            int[2]>::value));
-  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<const int[2]>::type,
-                            int[2]>::value));
-  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<const int(&)[2]>::type,
-                            int[2]>::value));
-  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<const int(&&)[2]>::type,
-                            int[2]>::value));
+  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<const int*>::type, const int*>::value));
+  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<int[2]>::type, int[2]>::value));
+  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<int(&)[2]>::type, int[2]>::value));
+  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<int(&&)[2]>::type, int[2]>::value));
+  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<const int[2]>::type, int[2]>::value));
+  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<const int(&)[2]>::type, int[2]>::value));
+  EXPECT_TRUE((std::is_same<typename absl::remove_cvref<const int(&&)[2]>::type, int[2]>::value));
 }
 
-#define ABSL_INTERNAL_EXPECT_ALIAS_EQUIVALENCE(trait_name, ...)          \
-  EXPECT_TRUE((std::is_same<typename std::trait_name<__VA_ARGS__>::type, \
-                            absl::trait_name##_t<__VA_ARGS__>>::value))
+#define ABSL_INTERNAL_EXPECT_ALIAS_EQUIVALENCE(trait_name, ...) \
+  EXPECT_TRUE((std::is_same<typename std::trait_name<__VA_ARGS__>::type, absl::trait_name##_t<__VA_ARGS__>>::value))
 
 TEST(TypeTraitsTest, TestRemoveCVAliases) {
   ABSL_INTERNAL_EXPECT_ALIAS_EQUIVALENCE(remove_cv, int);
@@ -1154,8 +1043,8 @@ TEST(TypeTraitsTest, TestDecay) {
   ABSL_INTERNAL_EXPECT_ALIAS_EQUIVALENCE(decay, int[][1]);
 
   ABSL_INTERNAL_EXPECT_ALIAS_EQUIVALENCE(decay, int());
-  ABSL_INTERNAL_EXPECT_ALIAS_EQUIVALENCE(decay, int(float));  // NOLINT
-  ABSL_INTERNAL_EXPECT_ALIAS_EQUIVALENCE(decay, int(char, ...));  // NOLINT
+  ABSL_INTERNAL_EXPECT_ALIAS_EQUIVALENCE(decay, int(float));     // NOLINT
+  ABSL_INTERNAL_EXPECT_ALIAS_EQUIVALENCE(decay, int(char, ...)); // NOLINT
 }
 
 struct TypeA {};
@@ -1169,20 +1058,17 @@ struct Wrap {};
 enum class TypeEnum { A, B, C, D };
 
 struct GetTypeT {
-  template <typename T,
-            absl::enable_if_t<std::is_same<T, TypeA>::value, int> = 0>
+  template <typename T, absl::enable_if_t<std::is_same<T, TypeA>::value, int> = 0>
   TypeEnum operator()(Wrap<T>) const {
     return TypeEnum::A;
   }
 
-  template <typename T,
-            absl::enable_if_t<std::is_same<T, TypeB>::value, int> = 0>
+  template <typename T, absl::enable_if_t<std::is_same<T, TypeB>::value, int> = 0>
   TypeEnum operator()(Wrap<T>) const {
     return TypeEnum::B;
   }
 
-  template <typename T,
-            absl::enable_if_t<std::is_same<T, TypeC>::value, int> = 0>
+  template <typename T, absl::enable_if_t<std::is_same<T, TypeC>::value, int> = 0>
   TypeEnum operator()(Wrap<T>) const {
     return TypeEnum::C;
   }
@@ -1214,7 +1100,7 @@ TEST(TypeTraitsTest, TestCommonType) {
 
 TEST(TypeTraitsTest, TestUnderlyingType) {
   enum class enum_char : char {};
-  enum class enum_long_long : long long {};  // NOLINT(runtime/int)
+  enum class enum_long_long : long long {}; // NOLINT(runtime/int)
 
   ABSL_INTERNAL_EXPECT_ALIAS_EQUIVALENCE(underlying_type, enum_char);
   ABSL_INTERNAL_EXPECT_ALIAS_EQUIVALENCE(underlying_type, enum_long_long);
@@ -1226,7 +1112,9 @@ struct GetTypeExtT {
     return GetType(std::forward<T>(arg));
   }
 
-  TypeEnum operator()(Wrap<TypeD>) const { return TypeEnum::D; }
+  TypeEnum operator()(Wrap<TypeD>) const {
+    return TypeEnum::D;
+  }
 } constexpr GetTypeExt = {};
 
 TEST(TypeTraitsTest, TestResultOf) {
@@ -1238,8 +1126,7 @@ TEST(TypeTraitsTest, TestResultOf) {
 
 template <typename T>
 bool TestCopyAssign() {
-  return absl::is_copy_assignable<T>::value ==
-         std::is_copy_assignable<T>::value;
+  return absl::is_copy_assignable<T>::value == std::is_copy_assignable<T>::value;
 }
 
 TEST(TypeTraitsTest, IsCopyAssignable) {
@@ -1255,7 +1142,9 @@ TEST(TypeTraitsTest, IsCopyAssignable) {
   class C {
    public:
     explicit C(C* c) : c_(c) {}
-    ~C() { delete c_; }
+    ~C() {
+      delete c_;
+    }
 
    private:
     C* c_;
@@ -1270,13 +1159,12 @@ TEST(TypeTraitsTest, IsCopyAssignable) {
   EXPECT_TRUE(TestCopyAssign<int(int) const>());
   EXPECT_TRUE(TestCopyAssign<int(...) volatile&>());
   EXPECT_TRUE(TestCopyAssign<int(int, ...) const volatile&&>());
-#endif  // _LIBCPP_VERSION
+#endif // _LIBCPP_VERSION
 }
 
 template <typename T>
 bool TestMoveAssign() {
-  return absl::is_move_assignable<T>::value ==
-         std::is_move_assignable<T>::value;
+  return absl::is_move_assignable<T>::value == std::is_move_assignable<T>::value;
 }
 
 TEST(TypeTraitsTest, IsMoveAssignable) {
@@ -1292,7 +1180,9 @@ TEST(TypeTraitsTest, IsMoveAssignable) {
   class C {
    public:
     explicit C(C* c) : c_(c) {}
-    ~C() { delete c_; }
+    ~C() {
+      delete c_;
+    }
     void operator=(const C&) = delete;
     void operator=(C&&) = delete;
 
@@ -1309,25 +1199,26 @@ TEST(TypeTraitsTest, IsMoveAssignable) {
   EXPECT_TRUE(TestMoveAssign<int(int) const>());
   EXPECT_TRUE(TestMoveAssign<int(...) volatile&>());
   EXPECT_TRUE(TestMoveAssign<int(int, ...) const volatile&&>());
-#endif  // _LIBCPP_VERSION
+#endif // _LIBCPP_VERSION
 }
 
 namespace adl_namespace {
 
-struct DeletedSwap {
-};
+struct DeletedSwap {};
 
 void swap(DeletedSwap&, DeletedSwap&) = delete;
 
 struct SpecialNoexceptSwap {
   SpecialNoexceptSwap(SpecialNoexceptSwap&&) {}
-  SpecialNoexceptSwap& operator=(SpecialNoexceptSwap&&) { return *this; }
+  SpecialNoexceptSwap& operator=(SpecialNoexceptSwap&&) {
+    return *this;
+  }
   ~SpecialNoexceptSwap() = default;
 };
 
 void swap(SpecialNoexceptSwap&, SpecialNoexceptSwap&) noexcept {}
 
-}  // namespace adl_namespace
+} // namespace adl_namespace
 
 TEST(TypeTraitsTest, IsSwappable) {
   using absl::type_traits_internal::IsSwappable;
@@ -1340,7 +1231,9 @@ TEST(TypeTraitsTest, IsSwappable) {
 
   struct NoConstruct {
     NoConstruct(NoConstruct&&) = delete;
-    NoConstruct& operator=(NoConstruct&&) { return *this; }
+    NoConstruct& operator=(NoConstruct&&) {
+      return *this;
+    }
     ~NoConstruct() = default;
   };
 
@@ -1366,7 +1259,9 @@ TEST(TypeTraitsTest, IsNothrowSwappable) {
 
   struct NonNoexceptMoves {
     NonNoexceptMoves(NonNoexceptMoves&&) {}
-    NonNoexceptMoves& operator=(NonNoexceptMoves&&) { return *this; }
+    NonNoexceptMoves& operator=(NonNoexceptMoves&&) {
+      return *this;
+    }
     ~NonNoexceptMoves() = default;
   };
 
@@ -1374,7 +1269,9 @@ TEST(TypeTraitsTest, IsNothrowSwappable) {
 
   struct NoConstruct {
     NoConstruct(NoConstruct&&) = delete;
-    NoConstruct& operator=(NoConstruct&&) { return *this; }
+    NoConstruct& operator=(NoConstruct&&) {
+      return *this;
+    }
     ~NoConstruct() = default;
   };
 
@@ -1393,4 +1290,4 @@ TEST(TypeTraitsTest, IsNothrowSwappable) {
   EXPECT_TRUE(IsNothrowSwappable<adl_namespace::SpecialNoexceptSwap>::value);
 }
 
-}  // namespace
+} // namespace

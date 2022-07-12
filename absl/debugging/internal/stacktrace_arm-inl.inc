@@ -69,6 +69,7 @@ void StacktraceArmDummyFunction() { __asm__ volatile(""); }
 template <bool IS_STACK_FRAMES, bool IS_WITH_CONTEXT>
 static int UnwindImpl(void** result, int* sizes, int max_depth, int skip_count,
                       const void * /* ucp */, int *min_dropped_frames) {
+                        
 #ifdef __GNUC__
   void **sp = reinterpret_cast<void**>(__builtin_frame_address(0));
 #else

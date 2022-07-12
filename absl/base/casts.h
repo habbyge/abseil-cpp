@@ -165,9 +165,7 @@ inline Dest bit_cast(const Source& source) {
 // new code.
 template <
     typename Dest, typename Source,
-    typename std::enable_if<
-        !internal_casts::is_bitcastable<Dest, Source>::value,
-        int>::type = 0>
+    typename std::enable_if<!internal_casts::is_bitcastable<Dest, Source>::value, int>::type = 0>
 ABSL_DEPRECATED(
     "absl::bit_cast type requirements were violated. Update the types "
     "being used such that they are the same size and are both "

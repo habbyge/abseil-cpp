@@ -91,14 +91,14 @@ struct MakeUniqueResult<T[N]> {
   using invalid = void;
 };
 
-}  // namespace memory_internal
+} // namespace memory_internal
 
 // gcc 4.8 has __cplusplus at 201301 but the libstdc++ shipped with it doesn't
 // define make_unique.  Other supported compilers either just define __cplusplus
 // as 201103 but have make_unique (msvc), or have make_unique whenever
 // __cplusplus > 201103 (clang).
-#if (__cplusplus > 201103L || defined(_MSC_VER)) && \
-    !(defined(__GLIBCXX__) && !defined(__cpp_lib_make_unique))
+#if (__cplusplus > 201103L || defined(_MSC_VER)) \
+    && !(defined(__GLIBCXX__) && !defined(__cpp_lib_make_unique))
 using std::make_unique;
 #else
 // -----------------------------------------------------------------------------
@@ -165,8 +165,7 @@ using std::make_unique;
 
 // `absl::make_unique` overload for non-array types.
 template <typename T, typename... Args>
-typename memory_internal::MakeUniqueResult<T>::scalar make_unique(
-    Args&&... args) {
+typename memory_internal::MakeUniqueResult<T>::scalar make_unique(Args&&... args) {
   return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
 }
 
@@ -182,8 +181,7 @@ typename memory_internal::MakeUniqueResult<T>::array make_unique(size_t n) {
 // `absl::make_unique` overload for an array T[N] of known bounds.
 // This construction will be rejected.
 template <typename T, typename... Args>
-typename memory_internal::MakeUniqueResult<T>::invalid make_unique(
-    Args&&... /* args */) = delete;
+typename memory_internal::MakeUniqueResult<T>::invalid make_unique(Args&&... /* args */) = delete;
 #endif
 
 // -----------------------------------------------------------------------------
@@ -251,8 +249,7 @@ std::weak_ptr<T> WeakenPtr(const std::shared_ptr<T>& ptr) {
 namespace memory_internal {
 
 // ExtractOr<E, O, D>::type evaluates to E<O> if possible. Otherwise, D.
-template <template <typename> class Extract, typename Obj, typename Default,
-          typename>
+template <template <typename> class Extract, typename Obj, typename Default, typename>
 struct ExtractOr {
   using type = Default;
 };
@@ -285,12 +282,10 @@ template <typename T>
 using GetSizeType = typename T::size_type;
 
 template <typename T>
-using GetPropagateOnContainerCopyAssignment =
-    typename T::propagate_on_container_copy_assignment;
+using GetPropagateOnContainerCopyAssignment = typename T::propagate_on_container_copy_assignment;
 
 template <typename T>
-using GetPropagateOnContainerMoveAssignment =
-    typename T::propagate_on_container_move_assignment;
+using GetPropagateOnContainerMoveAssignment = typename T::propagate_on_container_move_assignment;
 
 template <typename T>
 using GetPropagateOnContainerSwap = typename T::propagate_on_container_swap;
@@ -319,8 +314,7 @@ struct ElementType<T, void_t<typename T::element_type>> {
 template <typename T, typename U>
 struct RebindFirstArg;
 
-template <template <typename...> class Class, typename T, typename... Args,
-          typename U>
+template <template <typename...> class Class, typename T, typename... Args, typename U>
 struct RebindFirstArg<Class<T, Args...>, U> {
   using type = Class<U, Args...>;
 };
@@ -355,7 +349,7 @@ struct RebindAlloc<T, U, true> {
   using type = typename T::template rebind<U>::other;
 };
 
-}  // namespace memory_internal
+} // namespace memory_internal
 
 // -----------------------------------------------------------------------------
 // Class Template: pointer_traits
@@ -379,9 +373,8 @@ struct pointer_traits {
 
   // difference_type:
   // Ptr::difference_type if present, otherwise std::ptrdiff_t
-  using difference_type =
-      memory_internal::ExtractOrT<memory_internal::GetDifferenceType, Ptr,
-                                  std::ptrdiff_t>;
+  using difference_type
+      = memory_internal::ExtractOrT<memory_internal::GetDifferenceType, Ptr, std::ptrdiff_t>;
 
   // rebind:
   // Ptr::rebind<U> if exists, otherwise Template<U, Args...> if Ptr is a
@@ -391,7 +384,7 @@ struct pointer_traits {
 
   // pointer_to:
   // Calls Ptr::pointer_to(r)
-  static pointer pointer_to(element_type& r) {  // NOLINT(runtime/references)
+  static pointer pointer_to(element_type& r) { // NOLINT(runtime/references)
     return Ptr::pointer_to(r);
   }
 };
@@ -408,8 +401,7 @@ struct pointer_traits<T*> {
 
   // pointer_to:
   // Calls std::addressof(r)
-  static pointer pointer_to(
-      element_type& r) noexcept {  // NOLINT(runtime/references)
+  static pointer pointer_to(element_type& r) noexcept { // NOLINT(runtime/references)
     return std::addressof(r);
   }
 };
@@ -433,70 +425,67 @@ struct allocator_traits {
 
   // pointer:
   // Alloc::pointer if present, otherwise value_type*
-  using pointer = memory_internal::ExtractOrT<memory_internal::GetPointer,
-                                              Alloc, value_type*>;
+  using pointer = memory_internal::ExtractOrT<memory_internal::GetPointer, Alloc, value_type*>;
 
   // const_pointer:
   // Alloc::const_pointer if present, otherwise
   // absl::pointer_traits<pointer>::rebind<const value_type>
-  using const_pointer =
-      memory_internal::ExtractOrT<memory_internal::GetConstPointer, Alloc,
-                                  typename absl::pointer_traits<pointer>::
-                                      template rebind<const value_type>>;
+  using const_pointer = memory_internal::ExtractOrT<
+      memory_internal::GetConstPointer,
+      Alloc,
+      typename absl::pointer_traits<pointer>::template rebind<const value_type>>;
 
   // void_pointer:
   // Alloc::void_pointer if present, otherwise
   // absl::pointer_traits<pointer>::rebind<void>
-  using void_pointer = memory_internal::ExtractOrT<
-      memory_internal::GetVoidPointer, Alloc,
-      typename absl::pointer_traits<pointer>::template rebind<void>>;
+  using void_pointer
+      = memory_internal::ExtractOrT<memory_internal::GetVoidPointer,
+                                    Alloc,
+                                    typename absl::pointer_traits<pointer>::template rebind<void>>;
 
   // const_void_pointer:
   // Alloc::const_void_pointer if present, otherwise
   // absl::pointer_traits<pointer>::rebind<const void>
-  using const_void_pointer = memory_internal::ExtractOrT<
-      memory_internal::GetConstVoidPointer, Alloc,
-      typename absl::pointer_traits<pointer>::template rebind<const void>>;
+  using const_void_pointer
+      = memory_internal::ExtractOrT<memory_internal::GetConstVoidPointer,
+                                    Alloc,
+                                    typename absl::pointer_traits<pointer>::template rebind<const void>>;
 
   // difference_type:
   // Alloc::difference_type if present, otherwise
   // absl::pointer_traits<pointer>::difference_type
-  using difference_type = memory_internal::ExtractOrT<
-      memory_internal::GetDifferenceType, Alloc,
-      typename absl::pointer_traits<pointer>::difference_type>;
+  using difference_type
+      = memory_internal::ExtractOrT<memory_internal::GetDifferenceType,
+                                    Alloc,
+                                    typename absl::pointer_traits<pointer>::difference_type>;
 
   // size_type:
   // Alloc::size_type if present, otherwise
   // std::make_unsigned<difference_type>::type
-  using size_type = memory_internal::ExtractOrT<
-      memory_internal::GetSizeType, Alloc,
-      typename std::make_unsigned<difference_type>::type>;
+  using size_type = memory_internal::
+      ExtractOrT<memory_internal::GetSizeType, Alloc, typename std::make_unsigned<difference_type>::type>;
 
   // propagate_on_container_copy_assignment:
   // Alloc::propagate_on_container_copy_assignment if present, otherwise
   // std::false_type
-  using propagate_on_container_copy_assignment = memory_internal::ExtractOrT<
-      memory_internal::GetPropagateOnContainerCopyAssignment, Alloc,
-      std::false_type>;
+  using propagate_on_container_copy_assignment = memory_internal::
+      ExtractOrT<memory_internal::GetPropagateOnContainerCopyAssignment, Alloc, std::false_type>;
 
   // propagate_on_container_move_assignment:
   // Alloc::propagate_on_container_move_assignment if present, otherwise
   // std::false_type
-  using propagate_on_container_move_assignment = memory_internal::ExtractOrT<
-      memory_internal::GetPropagateOnContainerMoveAssignment, Alloc,
-      std::false_type>;
+  using propagate_on_container_move_assignment = memory_internal::
+      ExtractOrT<memory_internal::GetPropagateOnContainerMoveAssignment, Alloc, std::false_type>;
 
   // propagate_on_container_swap:
   // Alloc::propagate_on_container_swap if present, otherwise std::false_type
-  using propagate_on_container_swap =
-      memory_internal::ExtractOrT<memory_internal::GetPropagateOnContainerSwap,
-                                  Alloc, std::false_type>;
+  using propagate_on_container_swap
+      = memory_internal::ExtractOrT<memory_internal::GetPropagateOnContainerSwap, Alloc, std::false_type>;
 
   // is_always_equal:
   // Alloc::is_always_equal if present, otherwise std::is_empty<Alloc>::type
-  using is_always_equal =
-      memory_internal::ExtractOrT<memory_internal::GetIsAlwaysEqual, Alloc,
-                                  typename std::is_empty<Alloc>::type>;
+  using is_always_equal = memory_internal::
+      ExtractOrT<memory_internal::GetIsAlwaysEqual, Alloc, typename std::is_empty<Alloc>::type>;
 
   // rebind_alloc:
   // Alloc::rebind<T>::other if present, otherwise Alloc<T, Args> if this Alloc
@@ -511,7 +500,7 @@ struct allocator_traits {
 
   // allocate(Alloc& a, size_type n):
   // Calls a.allocate(n)
-  static pointer allocate(Alloc& a,  // NOLINT(runtime/references)
+  static pointer allocate(Alloc& a, // NOLINT(runtime/references)
                           size_type n) {
     return a.allocate(n);
   }
@@ -519,14 +508,16 @@ struct allocator_traits {
   // allocate(Alloc& a, size_type n, const_void_pointer hint):
   // Calls a.allocate(n, hint) if possible.
   // If not possible, calls a.allocate(n)
-  static pointer allocate(Alloc& a, size_type n,  // NOLINT(runtime/references)
+  static pointer allocate(Alloc& a,
+                          size_type n, // NOLINT(runtime/references)
                           const_void_pointer hint) {
     return allocate_impl(0, a, n, hint);
   }
 
   // deallocate(Alloc& a, pointer p, size_type n):
   // Calls a.deallocate(p, n)
-  static void deallocate(Alloc& a, pointer p,  // NOLINT(runtime/references)
+  static void deallocate(Alloc& a,
+                         pointer p, // NOLINT(runtime/references)
                          size_type n) {
     a.deallocate(p, n);
   }
@@ -536,7 +527,8 @@ struct allocator_traits {
   // If not possible, calls
   //   ::new (static_cast<void*>(p)) T(std::forward<Args>(args)...)
   template <typename T, typename... Args>
-  static void construct(Alloc& a, T* p,  // NOLINT(runtime/references)
+  static void construct(Alloc& a,
+                        T* p, // NOLINT(runtime/references)
                         Args&&... args) {
     construct_impl(0, a, p, std::forward<Args>(args)...);
   }
@@ -544,7 +536,7 @@ struct allocator_traits {
   // destroy(Alloc& a, T* p):
   // Calls a.destroy(p) if possible. If not possible, calls p->~T().
   template <typename T>
-  static void destroy(Alloc& a, T* p) {  // NOLINT(runtime/references)
+  static void destroy(Alloc& a, T* p) { // NOLINT(runtime/references)
     destroy_impl(0, a, p);
   }
 
@@ -562,20 +554,23 @@ struct allocator_traits {
 
  private:
   template <typename A>
-  static auto allocate_impl(int, A& a,  // NOLINT(runtime/references)
-                            size_type n, const_void_pointer hint)
-      -> decltype(a.allocate(n, hint)) {
+  static auto allocate_impl(int,
+                            A& a, // NOLINT(runtime/references)
+                            size_type n,
+                            const_void_pointer hint) -> decltype(a.allocate(n, hint)) {
     return a.allocate(n, hint);
   }
-  static pointer allocate_impl(char, Alloc& a,  // NOLINT(runtime/references)
-                               size_type n, const_void_pointer) {
+  static pointer allocate_impl(char,
+                               Alloc& a, // NOLINT(runtime/references)
+                               size_type n,
+                               const_void_pointer) {
     return a.allocate(n);
   }
 
   template <typename A, typename... Args>
-  static auto construct_impl(int, A& a,  // NOLINT(runtime/references)
-                             Args&&... args)
-      -> decltype(a.construct(std::forward<Args>(args)...)) {
+  static auto construct_impl(int,
+                             A& a, // NOLINT(runtime/references)
+                             Args&&... args) -> decltype(a.construct(std::forward<Args>(args)...)) {
     a.construct(std::forward<Args>(args)...);
   }
 
@@ -585,7 +580,8 @@ struct allocator_traits {
   }
 
   template <typename A, typename T>
-  static auto destroy_impl(int, A& a,  // NOLINT(runtime/references)
+  static auto destroy_impl(int,
+                           A& a, // NOLINT(runtime/references)
                            T* p) -> decltype(a.destroy(p)) {
     a.destroy(p);
   }
@@ -607,12 +603,9 @@ struct allocator_traits {
       -> decltype(a.select_on_container_copy_construction()) {
     return a.select_on_container_copy_construction();
   }
-  static Alloc select_on_container_copy_construction_impl(char,
-                                                          const Alloc& a) {
-    return a;
-  }
+  static Alloc select_on_container_copy_construction_impl(char, const Alloc& a) { return a; }
 };
-#endif  // __cplusplus >= 201703L
+#endif // __cplusplus >= 201703L
 
 namespace memory_internal {
 
@@ -621,7 +614,7 @@ namespace memory_internal {
 template <typename Alloc>
 using GetIsNothrow = typename Alloc::is_nothrow;
 
-}  // namespace memory_internal
+} // namespace memory_internal
 
 // ABSL_ALLOCATOR_NOTHROW is a build time configuration macro for user to
 // specify whether the default allocation function can throw or never throws.
@@ -644,8 +637,7 @@ using GetIsNothrow = typename Alloc::is_nothrow;
 // allocator_is_nothrow nor std::allocator.
 template <typename Alloc>
 struct allocator_is_nothrow
-    : memory_internal::ExtractOrT<memory_internal::GetIsNothrow, Alloc,
-                                  std::false_type> {};
+    : memory_internal::ExtractOrT<memory_internal::GetIsNothrow, Alloc, std::false_type> {};
 
 #if defined(ABSL_ALLOCATOR_NOTHROW) && ABSL_ALLOCATOR_NOTHROW
 template <typename T>
@@ -657,13 +649,9 @@ struct default_allocator_is_nothrow : std::false_type {};
 
 namespace memory_internal {
 template <typename Allocator, typename Iterator, typename... Args>
-void ConstructRange(Allocator& alloc, Iterator first, Iterator last,
-                    const Args&... args) {
+void ConstructRange(Allocator& alloc, Iterator first, Iterator last, const Args&... args) {
   for (Iterator cur = first; cur != last; ++cur) {
-    ABSL_INTERNAL_TRY {
-      std::allocator_traits<Allocator>::construct(alloc, std::addressof(*cur),
-                                                  args...);
-    }
+    ABSL_INTERNAL_TRY { std::allocator_traits<Allocator>::construct(alloc, std::addressof(*cur), args...); }
     ABSL_INTERNAL_CATCH_ANY {
       while (cur != first) {
         --cur;
@@ -675,14 +663,9 @@ void ConstructRange(Allocator& alloc, Iterator first, Iterator last,
 }
 
 template <typename Allocator, typename Iterator, typename InputIterator>
-void CopyRange(Allocator& alloc, Iterator destination, InputIterator first,
-               InputIterator last) {
-  for (Iterator cur = destination; first != last;
-       static_cast<void>(++cur), static_cast<void>(++first)) {
-    ABSL_INTERNAL_TRY {
-      std::allocator_traits<Allocator>::construct(alloc, std::addressof(*cur),
-                                                  *first);
-    }
+void CopyRange(Allocator& alloc, Iterator destination, InputIterator first, InputIterator last) {
+  for (Iterator cur = destination; first != last; static_cast<void>(++cur), static_cast<void>(++first)) {
+    ABSL_INTERNAL_TRY { std::allocator_traits<Allocator>::construct(alloc, std::addressof(*cur), *first); }
     ABSL_INTERNAL_CATCH_ANY {
       while (cur != destination) {
         --cur;
@@ -692,8 +675,8 @@ void CopyRange(Allocator& alloc, Iterator destination, InputIterator first,
     }
   }
 }
-}  // namespace memory_internal
+} // namespace memory_internal
 ABSL_NAMESPACE_END
-}  // namespace absl
+} // namespace absl
 
-#endif  // ABSL_MEMORY_MEMORY_H_
+#endif // ABSL_MEMORY_MEMORY_H_

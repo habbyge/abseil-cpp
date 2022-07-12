@@ -43,15 +43,16 @@ uint32_t SpinLockWait(std::atomic<uint32_t> *w, int n,
   for (;;) {
     uint32_t v = w->load(std::memory_order_acquire);
     int i;
-    for (i = 0; i != n && v != trans[i].from; i++) {
-    }
+    for (i = 0; i != n && v != trans[i].from; i++) {}
     if (i == n) {
       SpinLockDelay(w, v, ++loop, scheduling_mode);  // no matching transition
     } else if (trans[i].to == v ||                   // null transition
                w->compare_exchange_strong(v, trans[i].to,
                                           std::memory_order_acquire,
                                           std::memory_order_relaxed)) {
-      if (trans[i].done) return v;
+      if (trans[i].done) {
+        return v;
+      }
     }
   }
 }

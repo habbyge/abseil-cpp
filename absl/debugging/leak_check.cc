@@ -23,8 +23,12 @@
 
 namespace absl {
 ABSL_NAMESPACE_BEGIN
-bool HaveLeakSanitizer() { return false; }
-bool LeakCheckerIsActive() { return false; }
+bool HaveLeakSanitizer() { // Sanitizer 消毒剂的意思
+  return false; 
+}
+bool LeakCheckerIsActive() {
+  return false; 
+}
 void DoIgnoreLeak(const void*) { }
 void RegisterLivePointers(const void*, size_t) { }
 void UnRegisterLivePointers(const void*, size_t) { }
@@ -50,7 +54,9 @@ bool LeakCheckerIsActive() {
   return !(&__lsan_is_turned_off && __lsan_is_turned_off());
 }
 #else
-bool LeakCheckerIsActive() { return true; }
+bool LeakCheckerIsActive() {
+  return true;
+}
 #endif
 
 bool FindAndReportLeaks() { return __lsan_do_recoverable_leak_check(); }

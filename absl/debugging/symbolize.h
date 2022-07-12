@@ -91,7 +91,7 @@ void InitializeSymbolizer(const char* argv0);
 //     }
 //     absl::PrintF("%p  %s\n", pc, symbol);
 //  }
-bool Symbolize(const void *pc, char *out, int out_size);
+bool Symbolize(const void* pc, char* out, int out_size);
 
 ABSL_NAMESPACE_END
 }  // namespace absl
