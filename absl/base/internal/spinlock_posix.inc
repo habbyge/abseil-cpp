@@ -28,6 +28,7 @@ extern "C" {
 ABSL_ATTRIBUTE_WEAK void ABSL_INTERNAL_C_SYMBOL(AbslInternalSpinLockDelay)(
     std::atomic<uint32_t>* /* lock_word */, uint32_t /* value */, int loop,
     absl::base_internal::SchedulingMode /* mode */) {
+
   absl::base_internal::ErrnoSaver errno_saver;
   if (loop == 0) {
   } else if (loop == 1) {

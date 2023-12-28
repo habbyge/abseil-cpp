@@ -24,13 +24,16 @@ namespace absl {
 ABSL_NAMESPACE_BEGIN
 namespace base_internal {
 
-// Used to describe how a thread may be scheduled.  Typically associated with
+// Used to describe how a thread may be scheduled. Typically associated with
 // the declaration of a resource supporting synchronized access.
+// 用于描述如何调度线程。通常与支持同步访问的资源声明相关联。
 //
-// SCHEDULE_COOPERATIVE_AND_KERNEL:
+// SCHEDULE_COOPERATIVE_AND_KERNEL: 与内核调度合作
 // Specifies that when waiting, a cooperative thread (e.g. a Fiber) may
 // reschedule (using base::scheduling semantics); allowing other cooperative
 // threads to proceed.
+// 指定在等待时，协作线程（例如 Fiber）可以重新调度（使用 base::scheduling 语义）； 
+// 允许其他协作线程继续进行。
 //
 // SCHEDULE_KERNEL_ONLY: (Also described as "non-cooperative")
 // Specifies that no cooperative scheduling semantics may be used, even if the
@@ -38,14 +41,21 @@ namespace base_internal {
 // cooperative threads will NOT allow other cooperative threads to execute in
 // their place while waiting for a resource of this type.  Host operating system
 // semantics (e.g. a futex) may still be used.
+// 指定不能使用协作调度语义，即使当前线程本身是协作调度的。
+// 这意味着协作线程将不允许其他协作线程在等待这种类型的资源时在它们的位置执行。
+// 仍可使用主机操作系统语义（例如 futex）。
 //
 // When optional, clients should strongly prefer SCHEDULE_COOPERATIVE_AND_KERNEL
 // by default.  SCHEDULE_KERNEL_ONLY should only be used for resources on which
 // base::scheduling (e.g. the implementation of a Scheduler) may depend.
+// 当可选时，默认情况下客户端应该强烈选择 SCHEDULE_COOPERATIVE_AND_KERNEL。
+// SCHEDULE_KERNEL_ONLY 应该只用于 base::scheduling（例如调度程序的实现）可能依赖的资源。
 //
 // NOTE: Cooperative resources may not be nested below non-cooperative ones.
 // This means that it is invalid to to acquire a SCHEDULE_COOPERATIVE_AND_KERNEL
 // resource if a SCHEDULE_KERNEL_ONLY resource is already held.
+// 注意：合作资源不能嵌套在非合作资源之下。这意味着如果已经持有 SCHEDULE_KERNEL_ONLY 资源，
+// 则获取 SCHEDULE_COOPERATIVE_AND_KERNEL 资源是无效的。
 enum SchedulingMode {
   SCHEDULE_KERNEL_ONLY = 0,         // Allow scheduling only the host OS.
   SCHEDULE_COOPERATIVE_AND_KERNEL,  // Also allow cooperative scheduling.
