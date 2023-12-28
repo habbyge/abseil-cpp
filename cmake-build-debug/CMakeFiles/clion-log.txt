@@ -1,8 +1,8 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja /Users/bytedance/abseil-cpp
--- The CXX compiler identification is AppleClang 13.0.0.13000029
+/Users/bytedance/Library/Android/sdk/cmake/3.18.1/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/usr/bin/make -DCMAKE_C_COMPILER=/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/armv7a-linux-androideabi30-clang -DCMAKE_CXX_COMPILER=/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/armv7a-linux-androideabi30-clang++ -G "CodeBlocks - Unix Makefiles" -S /Users/bytedance/abseil-cpp -B /Users/bytedance/abseil-cpp/cmake-build-debug
+-- The CXX compiler identification is Clang 9.0.8
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ - skipped
+-- Check for working CXX compiler: /Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/armv7a-linux-androideabi30-clang++ - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 CMake Warning at CMakeLists.txt:74 (message):
@@ -14,7 +14,13 @@ CMake Warning at CMakeLists.txt:74 (message):
 -- Looking for C++ include pthread.h
 -- Looking for C++ include pthread.h - found
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - not found
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
 -- Found Threads: TRUE  
 CMake Warning at CMakeLists.txt:188 (message):
     The default and system-level install directories are unsupported except in LTS   releases of Abseil.  Please set CMAKE_INSTALL_PREFIX to install Abseil in your   source or build tree directly.    
@@ -22,4 +28,10 @@ CMake Warning at CMakeLists.txt:188 (message):
 
 -- Configuring done
 -- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_C_COMPILER
+
+
 -- Build files have been written to: /Users/bytedance/abseil-cpp/cmake-build-debug

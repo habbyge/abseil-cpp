@@ -1,0 +1,2 @@
+/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar qc libabsl_spinlock_wait.a CMakeFiles/spinlock_wait.dir/internal/spinlock_wait.cc.o
+/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ranlib libabsl_spinlock_wait.a

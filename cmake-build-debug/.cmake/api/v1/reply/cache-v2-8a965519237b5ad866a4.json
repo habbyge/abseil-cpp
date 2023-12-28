@@ -1,0 +1,2259 @@
+{
+	"entries" : 
+	[
+		{
+			"name" : "ABSL_ENABLE_INSTALL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enable install rule"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "ON"
+		},
+		{
+			"name" : "ABSL_GOOGLETEST_DOWNLOAD_URL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "If set, download GoogleTest from this URL"
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "ABSL_LOCAL_GOOGLETEST_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "If ABSL_USE_GOOGLETEST_HEAD is OFF and ABSL_GOOGLETEST_URL is not set, specifies the directory of a local GoogleTest checkout."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/usr/src/googletest"
+		},
+		{
+			"name" : "ABSL_PROPAGATE_CXX_STD",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Use CMake C++ standard meta features (e.g. cxx_std_11) that propagate to targets that link to Abseil"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ABSL_USE_EXTERNAL_GOOGLETEST",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "If ON, Abseil will assume that the targets for GoogleTest are already provided by the including project. This makes sense when Abseil is used with add_subproject."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ABSL_USE_GOOGLETEST_HEAD",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "If ON, abseil will download HEAD from GoogleTest at config time."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "BUILD_TESTING",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Build the testing tree."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "CMAKE_ADDR2LINE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-addr2line"
+		},
+		{
+			"name" : "CMAKE_AR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar"
+		},
+		{
+			"name" : "CMAKE_BUILD_TYPE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel ..."
+				}
+			],
+			"type" : "STRING",
+			"value" : "Debug"
+		},
+		{
+			"name" : "CMAKE_CACHEFILE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "This is the directory where this CMakeCache.txt was created"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/Users/bytedance/abseil-cpp/cmake-build-debug"
+		},
+		{
+			"name" : "CMAKE_CACHE_MAJOR_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Major version of cmake used to create the current loaded cache"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "3"
+		},
+		{
+			"name" : "CMAKE_CACHE_MINOR_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Minor version of cmake used to create the current loaded cache"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "18"
+		},
+		{
+			"name" : "CMAKE_CACHE_PATCH_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Patch version of cmake used to create the current loaded cache"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "CMAKE_CODEBLOCKS_COMPILER_ID",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Id string of the compiler for the CodeBlocks IDE. Automatically detected when left empty"
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_CODEBLOCKS_EXECUTABLE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The CodeBlocks executable"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "CMAKE_CODEBLOCKS_EXECUTABLE-NOTFOUND"
+		},
+		{
+			"name" : "CMAKE_CODEBLOCKS_MAKE_ARGUMENTS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Additional command line arguments when CodeBlocks invokes make. Enter e.g. -j<some_number> to get parallel builds"
+				}
+			],
+			"type" : "STRING",
+			"value" : "-j12"
+		},
+		{
+			"name" : "CMAKE_COLOR_MAKEFILE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enable/Disable color output during build."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "ON"
+		},
+		{
+			"name" : "CMAKE_COMMAND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to CMake executable."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/Users/bytedance/Library/Android/sdk/cmake/3.18.1/bin/cmake"
+		},
+		{
+			"name" : "CMAKE_CPACK_COMMAND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to cpack program executable."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/Users/bytedance/Library/Android/sdk/cmake/3.18.1/bin/cpack"
+		},
+		{
+			"name" : "CMAKE_CTEST_COMMAND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to ctest program executable."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/Users/bytedance/Library/Android/sdk/cmake/3.18.1/bin/ctest"
+		},
+		{
+			"name" : "CMAKE_CXX_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "No help, variable specified on the command line."
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : "/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/armv7a-linux-androideabi30-clang++"
+		},
+		{
+			"name" : "CMAKE_CXX_COMPILER_AR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "LLVM archiver"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "CMAKE_CXX_COMPILER_AR-NOTFOUND"
+		},
+		{
+			"name" : "CMAKE_CXX_COMPILER_RANLIB",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Generate index for LLVM archive"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "CMAKE_CXX_COMPILER_RANLIB-NOTFOUND"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-g"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-Os -DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-O3 -DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-O2 -g -DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_C_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "No help, variable specified on the command line."
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : "/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/armv7a-linux-androideabi30-clang"
+		},
+		{
+			"name" : "CMAKE_DLLTOOL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "CMAKE_DLLTOOL-NOTFOUND"
+		},
+		{
+			"name" : "CMAKE_EXECUTABLE_FORMAT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Executable file format"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ELF"
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXPORT_COMPILE_COMMANDS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enable/Disable output of compile commands during generation."
+				}
+			],
+			"type" : "BOOL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXTRA_GENERATOR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of external makefile project generator."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "CodeBlocks"
+		},
+		{
+			"name" : "CMAKE_EXTRA_GENERATOR_CXX_SYSTEM_DEFINED_MACROS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "CXX compiler system defined macros"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "__llvm__;1;__clang__;1;__clang_major__;9;__clang_minor__;0;__clang_patchlevel__;8;__clang_version__;\"9.0.8 (https://android.googlesource.com/toolchain/llvm-project 98c855489587874b2a325e7a516b99d838599c6f)\";__GNUC_MINOR__;2;__GNUC_PATCHLEVEL__;1;__GNUC__;4;__GXX_ABI_VERSION;1002;__ATOMIC_RELAXED;0;__ATOMIC_CONSUME;1;__ATOMIC_ACQUIRE;2;__ATOMIC_RELEASE;3;__ATOMIC_ACQ_REL;4;__ATOMIC_SEQ_CST;5;__OPENCL_MEMORY_SCOPE_WORK_ITEM;0;__OPENCL_MEMORY_SCOPE_WORK_GROUP;1;__OPENCL_MEMORY_SCOPE_DEVICE;2;__OPENCL_MEMORY_SCOPE_ALL_SVM_DEVICES;3;__OPENCL_MEMORY_SCOPE_SUB_GROUP;4;__PRAGMA_REDEFINE_EXTNAME;1;__VERSION__;\"4.2.1 Compatible Android (6454773 based on r365631c2) Clang 9.0.8 (https://android.googlesource.com/toolchain/llvm-project 98c855489587874b2a325e7a516b99d838599c6f)\";__GXX_EXPERIMENTAL_CXX0X__;1;__OBJC_BOOL_IS_BOOL;0;__cpp_rtti;199711L;__cpp_exceptions;199711L;__cpp_unicode_characters;200704L;__cpp_raw_strings;200710L;__cpp_unicode_literals;200710L;__cpp_user_defined_literals;200809L;__cpp_lambdas;200907L;__cpp_constexpr;201304L;__cpp_range_based_for;200907;__cpp_static_assert;200410;__cpp_decltype;200707L;__cpp_attributes;200809L;__cpp_rvalue_references;200610L;__cpp_variadic_templates;200704L;__cpp_initializer_lists;200806L;__cpp_delegating_constructors;200604L;__cpp_nsdmi;200809L;__cpp_inheriting_constructors;201511L;__cpp_ref_qualifiers;200710L;__cpp_alias_templates;200704L;__cpp_threadsafe_static_init;200806L;__cpp_binary_literals;201304L;__cpp_digit_separators;201309L;__cpp_init_captures;201304L;__cpp_generic_lambdas;201304L;__cpp_decltype_auto;201304L;__cpp_return_type_deduction;201304L;__cpp_aggregate_nsdmi;201304L;__cpp_variable_templates;201304L;__cpp_impl_destroying_delete;201806L;__CONSTANT_CFSTRINGS__;1;__EXCEPTIONS;1;__GXX_RTTI;1;__DEPRECATED;1;__GNUG__;4;__GXX_WEAK__;1;__private_extern__;extern;__ORDER_LITTLE_ENDIAN__;1234;__ORDER_BIG_ENDIAN__;4321;__ORDER_PDP_ENDIAN__;3412;__BYTE_ORDER__;__ORDER_LITTLE_ENDIAN__;__LITTLE_ENDIAN__;1;_ILP32;1;__ILP32__;1;__CHAR_BIT__;8;__SCHAR_MAX__;127;__SHRT_MAX__;32767;__INT_MAX__;2147483647;__LONG_MAX__;2147483647L;__LONG_LONG_MAX__;9223372036854775807LL;__WCHAR_MAX__;4294967295U;__WINT_MAX__;4294967295U;__INTMAX_MAX__;9223372036854775807LL;__SIZE_MAX__;4294967295U;__UINTMAX_MAX__;18446744073709551615ULL;__PTRDIFF_MAX__;2147483647;__INTPTR_MAX__;2147483647;__UINTPTR_MAX__;4294967295U;__SIZEOF_DOUBLE__;8;__SIZEOF_FLOAT__;4;__SIZEOF_INT__;4;__SIZEOF_LONG__;4;__SIZEOF_LONG_DOUBLE__;8;__SIZEOF_LONG_LONG__;8;__SIZEOF_POINTER__;4;__SIZEOF_SHORT__;2;__SIZEOF_PTRDIFF_T__;4;__SIZEOF_SIZE_T__;4;__SIZEOF_WCHAR_T__;4;__SIZEOF_WINT_T__;4;__INTMAX_TYPE__;long long int;__INTMAX_FMTd__;\"lld\";__INTMAX_FMTi__;\"lli\";__INTMAX_C_SUFFIX__;LL;__UINTMAX_TYPE__;long long unsigned int;__UINTMAX_FMTo__;\"llo\";__UINTMAX_FMTu__;\"llu\";__UINTMAX_FMTx__;\"llx\";__UINTMAX_FMTX__;\"llX\";__UINTMAX_C_SUFFIX__;ULL;__INTMAX_WIDTH__;64;__PTRDIFF_TYPE__;int;__PTRDIFF_FMTd__;\"d\";__PTRDIFF_FMTi__;\"i\";__PTRDIFF_WIDTH__;32;__INTPTR_TYPE__;int;__INTPTR_FMTd__;\"d\";__INTPTR_FMTi__;\"i\";__INTPTR_WIDTH__;32;__SIZE_TYPE__;unsigned int;__SIZE_FMTo__;\"o\";__SIZE_FMTu__;\"u\";__SIZE_FMTx__;\"x\";__SIZE_FMTX__;\"X\";__SIZE_WIDTH__;32;__WCHAR_TYPE__;unsigned int;__WCHAR_WIDTH__;32;__WINT_TYPE__;unsigned int;__WINT_WIDTH__;32;__SIG_ATOMIC_WIDTH__;32;__SIG_ATOMIC_MAX__;2147483647;__CHAR16_TYPE__;unsigned short;__CHAR32_TYPE__;unsigned int;__UINTMAX_WIDTH__;64;__UINTPTR_TYPE__;unsigned int;__UINTPTR_FMTo__;\"o\";__UINTPTR_FMTu__;\"u\";__UINTPTR_FMTx__;\"x\";__UINTPTR_FMTX__;\"X\";__UINTPTR_WIDTH__;32;__FLT16_DENORM_MIN__;5.9604644775390625e-8F16;__FLT16_HAS_DENORM__;1;__FLT16_DIG__;3;__FLT16_DECIMAL_DIG__;5;__FLT16_EPSILON__;9.765625e-4F16;__FLT16_HAS_INFINITY__;1;__FLT16_HAS_QUIET_NAN__;1;__FLT16_MANT_DIG__;11;__FLT16_MAX_10_EXP__;4;__FLT16_MAX_EXP__;16;__FLT16_MAX__;6.5504e+4F16;__FLT16_MIN_10_EXP__;(-4);__FLT16_MIN_EXP__;(-13);__FLT16_MIN__;6.103515625e-5F16;__FLT_DENORM_MIN__;1.40129846e-45F;__FLT_HAS_DENORM__;1;__FLT_DIG__;6;__FLT_DECIMAL_DIG__;9;__FLT_EPSILON__;1.19209290e-7F;__FLT_HAS_INFINITY__;1;__FLT_HAS_QUIET_NAN__;1;__FLT_MANT_DIG__;24;__FLT_MAX_10_EXP__;38;__FLT_MAX_EXP__;128;__FLT_MAX__;3.40282347e+38F;__FLT_MIN_10_EXP__;(-37);__FLT_MIN_EXP__;(-125);__FLT_MIN__;1.17549435e-38F;__DBL_DENORM_MIN__;4.9406564584124654e-324;__DBL_HAS_DENORM__;1;__DBL_DIG__;15;__DBL_DECIMAL_DIG__;17;__DBL_EPSILON__;2.2204460492503131e-16;__DBL_HAS_INFINITY__;1;__DBL_HAS_QUIET_NAN__;1;__DBL_MANT_DIG__;53;__DBL_MAX_10_EXP__;308;__DBL_MAX_EXP__;1024;__DBL_MAX__;1.7976931348623157e+308;__DBL_MIN_10_EXP__;(-307);__DBL_MIN_EXP__;(-1021);__DBL_MIN__;2.2250738585072014e-308;__LDBL_DENORM_MIN__;4.9406564584124654e-324L;__LDBL_HAS_DENORM__;1;__LDBL_DIG__;15;__LDBL_DECIMAL_DIG__;17;__LDBL_EPSILON__;2.2204460492503131e-16L;__LDBL_HAS_INFINITY__;1;__LDBL_HAS_QUIET_NAN__;1;__LDBL_MANT_DIG__;53;__LDBL_MAX_10_EXP__;308;__LDBL_MAX_EXP__;1024;__LDBL_MAX__;1.7976931348623157e+308L;__LDBL_MIN_10_EXP__;(-307);__LDBL_MIN_EXP__;(-1021);__LDBL_MIN__;2.2250738585072014e-308L;__POINTER_WIDTH__;32;__BIGGEST_ALIGNMENT__;8;__CHAR_UNSIGNED__;1;__WCHAR_UNSIGNED__;1;__WINT_UNSIGNED__;1;__INT8_TYPE__;signed char;__INT8_FMTd__;\"hhd\";__INT8_FMTi__;\"hhi\";__INT8_C_SUFFIX__; ;__INT16_TYPE__;short;__INT16_FMTd__;\"hd\";__INT16_FMTi__;\"hi\";__INT16_C_SUFFIX__; ;__INT32_TYPE__;int;__INT32_FMTd__;\"d\";__INT32_FMTi__;\"i\";__INT32_C_SUFFIX__; ;__INT64_TYPE__;long long int;__INT64_FMTd__;\"lld\";__INT64_FMTi__;\"lli\";__INT64_C_SUFFIX__;LL;__UINT8_TYPE__;unsigned char;__UINT8_FMTo__;\"hho\";__UINT8_FMTu__;\"hhu\";__UINT8_FMTx__;\"hhx\";__UINT8_FMTX__;\"hhX\";__UINT8_C_SUFFIX__; ;__UINT8_MAX__;255;__INT8_MAX__;127;__UINT16_TYPE__;unsigned short;__UINT16_FMTo__;\"ho\";__UINT16_FMTu__;\"hu\";__UINT16_FMTx__;\"hx\";__UINT16_FMTX__;\"hX\";__UINT16_C_SUFFIX__; ;__UINT16_MAX__;65535;__INT16_MAX__;32767;__UINT32_TYPE__;unsigned int;__UINT32_FMTo__;\"o\";__UINT32_FMTu__;\"u\";__UINT32_FMTx__;\"x\";__UINT32_FMTX__;\"X\";__UINT32_C_SUFFIX__;U;__UINT32_MAX__;4294967295U;__INT32_MAX__;2147483647;__UINT64_TYPE__;long long unsigned int;__UINT64_FMTo__;\"llo\";__UINT64_FMTu__;\"llu\";__UINT64_FMTx__;\"llx\";__UINT64_FMTX__;\"llX\";__UINT64_C_SUFFIX__;ULL;__UINT64_MAX__;18446744073709551615ULL;__INT64_MAX__;9223372036854775807LL;__INT_LEAST8_TYPE__;signed char;__INT_LEAST8_MAX__;127;__INT_LEAST8_FMTd__;\"hhd\";__INT_LEAST8_FMTi__;\"hhi\";__UINT_LEAST8_TYPE__;unsigned char;__UINT_LEAST8_MAX__;255;__UINT_LEAST8_FMTo__;\"hho\";__UINT_LEAST8_FMTu__;\"hhu\";__UINT_LEAST8_FMTx__;\"hhx\";__UINT_LEAST8_FMTX__;\"hhX\";__INT_LEAST16_TYPE__;short;__INT_LEAST16_MAX__;32767;__INT_LEAST16_FMTd__;\"hd\";__INT_LEAST16_FMTi__;\"hi\";__UINT_LEAST16_TYPE__;unsigned short;__UINT_LEAST16_MAX__;65535;__UINT_LEAST16_FMTo__;\"ho\";__UINT_LEAST16_FMTu__;\"hu\";__UINT_LEAST16_FMTx__;\"hx\";__UINT_LEAST16_FMTX__;\"hX\";__INT_LEAST32_TYPE__;int;__INT_LEAST32_MAX__;2147483647;__INT_LEAST32_FMTd__;\"d\";__INT_LEAST32_FMTi__;\"i\";__UINT_LEAST32_TYPE__;unsigned int;__UINT_LEAST32_MAX__;4294967295U;__UINT_LEAST32_FMTo__;\"o\";__UINT_LEAST32_FMTu__;\"u\";__UINT_LEAST32_FMTx__;\"x\";__UINT_LEAST32_FMTX__;\"X\";__INT_LEAST64_TYPE__;long long int;__INT_LEAST64_MAX__;9223372036854775807LL;__INT_LEAST64_FMTd__;\"lld\";__INT_LEAST64_FMTi__;\"lli\";__UINT_LEAST64_TYPE__;long long unsigned int;__UINT_LEAST64_MAX__;18446744073709551615ULL;__UINT_LEAST64_FMTo__;\"llo\";__UINT_LEAST64_FMTu__;\"llu\";__UINT_LEAST64_FMTx__;\"llx\";__UINT_LEAST64_FMTX__;\"llX\";__INT_FAST8_TYPE__;signed char;__INT_FAST8_MAX__;127;__INT_FAST8_FMTd__;\"hhd\";__INT_FAST8_FMTi__;\"hhi\";__UINT_FAST8_TYPE__;unsigned char;__UINT_FAST8_MAX__;255;__UINT_FAST8_FMTo__;\"hho\";__UINT_FAST8_FMTu__;\"hhu\";__UINT_FAST8_FMTx__;\"hhx\";__UINT_FAST8_FMTX__;\"hhX\";__INT_FAST16_TYPE__;short;__INT_FAST16_MAX__;32767;__INT_FAST16_FMTd__;\"hd\";__INT_FAST16_FMTi__;\"hi\";__UINT_FAST16_TYPE__;unsigned short;__UINT_FAST16_MAX__;65535;__UINT_FAST16_FMTo__;\"ho\";__UINT_FAST16_FMTu__;\"hu\";__UINT_FAST16_FMTx__;\"hx\";__UINT_FAST16_FMTX__;\"hX\";__INT_FAST32_TYPE__;int;__INT_FAST32_MAX__;2147483647;__INT_FAST32_FMTd__;\"d\";__INT_FAST32_FMTi__;\"i\";__UINT_FAST32_TYPE__;unsigned int;__UINT_FAST32_MAX__;4294967295U;__UINT_FAST32_FMTo__;\"o\";__UINT_FAST32_FMTu__;\"u\";__UINT_FAST32_FMTx__;\"x\";__UINT_FAST32_FMTX__;\"X\";__INT_FAST64_TYPE__;long long int;__INT_FAST64_MAX__;9223372036854775807LL;__INT_FAST64_FMTd__;\"lld\";__INT_FAST64_FMTi__;\"lli\";__UINT_FAST64_TYPE__;long long unsigned int;__UINT_FAST64_MAX__;18446744073709551615ULL;__UINT_FAST64_FMTo__;\"llo\";__UINT_FAST64_FMTu__;\"llu\";__UINT_FAST64_FMTx__;\"llx\";__UINT_FAST64_FMTX__;\"llX\";__USER_LABEL_PREFIX__; ;__FINITE_MATH_ONLY__;0;__GNUC_GNU_INLINE__;1;__GCC_ATOMIC_TEST_AND_SET_TRUEVAL;1;__CLANG_ATOMIC_BOOL_LOCK_FREE;2;__CLANG_ATOMIC_CHAR_LOCK_FREE;2;__CLANG_ATOMIC_CHAR16_T_LOCK_FREE;2;__CLANG_ATOMIC_CHAR32_T_LOCK_FREE;2;__CLANG_ATOMIC_WCHAR_T_LOCK_FREE;2;__CLANG_ATOMIC_SHORT_LOCK_FREE;2;__CLANG_ATOMIC_INT_LOCK_FREE;2;__CLANG_ATOMIC_LONG_LOCK_FREE;2;__CLANG_ATOMIC_LLONG_LOCK_FREE;2;__CLANG_ATOMIC_POINTER_LOCK_FREE;2;__GCC_ATOMIC_BOOL_LOCK_FREE;2;__GCC_ATOMIC_CHAR_LOCK_FREE;2;__GCC_ATOMIC_CHAR16_T_LOCK_FREE;2;__GCC_ATOMIC_CHAR32_T_LOCK_FREE;2;__GCC_ATOMIC_WCHAR_T_LOCK_FREE;2;__GCC_ATOMIC_SHORT_LOCK_FREE;2;__GCC_ATOMIC_INT_LOCK_FREE;2;__GCC_ATOMIC_LONG_LOCK_FREE;2;__GCC_ATOMIC_LLONG_LOCK_FREE;2;__GCC_ATOMIC_POINTER_LOCK_FREE;2;__NO_INLINE__;1;__PIC__;2;__pic__;2;__PIE__;2;__pie__;2;__FLT_EVAL_METHOD__;0;__FLT_RADIX__;2;__DECIMAL_DIG__;__LDBL_DECIMAL_DIG__;__ARMEL__;1;__arm;1;__arm__;1;__REGISTER_PREFIX__; ;__ARM_ARCH_7A__;1;__ARM_ARCH;7;__ARM_ARCH_ISA_ARM;1;__ARM_ARCH_ISA_THUMB;2;__ARM_32BIT_STATE;1;__ARM_ARCH_PROFILE;'A';__ARM_FEATURE_UNALIGNED;1;__ARM_FEATURE_LDREX;0xf;__ARM_FEATURE_CLZ;1;__ARM_FP;0xc;__ARM_ACLE;200;__ARM_FP16_FORMAT_IEEE;1;__ARM_FP16_ARGS;1;__THUMB_INTERWORK__;1;__ARM_EABI__;1;__ARM_PCS;1;__ARM_FEATURE_SIMD32;1;__APCS_32__;1;__VFP_FP__;1;__ARM_VFPV2__;1;__ARM_VFPV3__;1;__ARM_NEON;1;__ARM_NEON__;1;__ARM_NEON_FP;0x4;__ARM_SIZEOF_WCHAR_T;4;__ARM_SIZEOF_MINIMAL_ENUM;4;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8;1;__ARM_FEATURE_DSP;1;__ARM_FEATURE_SAT;1;__ARM_FEATURE_QBIT;1;unix;1;__unix;1;__unix__;1;linux;1;__linux;1;__linux__;1;__ELF__;1;__ANDROID__;1;__ANDROID_API__;30;_GNU_SOURCE;1;__STDC__;1;__STDC_HOSTED__;1;__cplusplus;201402L;__STDCPP_DEFAULT_NEW_ALIGNMENT__;8U;__STDC_UTF_16__;1;__STDC_UTF_32__;1"
+		},
+		{
+			"name" : "CMAKE_EXTRA_GENERATOR_CXX_SYSTEM_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "CXX compiler system include directories"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/../sysroot/usr/include/c++/v1;/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/../sysroot/usr/local/include;/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/lib64/clang/9.0.8/include;/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/../sysroot/usr/include/arm-linux-androideabi;/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/../sysroot/usr/include"
+		},
+		{
+			"name" : "CMAKE_GENERATOR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of generator."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "Unix Makefiles"
+		},
+		{
+			"name" : "CMAKE_GENERATOR_INSTANCE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Generator instance identifier."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_GENERATOR_PLATFORM",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of generator platform."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_GENERATOR_TOOLSET",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of generator toolset."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_HAVE_LIBC_PTHREAD",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Test CMAKE_HAVE_LIBC_PTHREAD"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_HAVE_PTHREADS_CREATE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Have library pthreads"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_HAVE_PTHREAD_CREATE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Have library pthread"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_HAVE_PTHREAD_H",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Have include pthread.h"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "CMAKE_HOME_DIRECTORY",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Source directory with the top level CMakeLists.txt file for this project"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/Users/bytedance/abseil-cpp"
+		},
+		{
+			"name" : "CMAKE_INSTALL_BINDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "User executables (bin)"
+				}
+			],
+			"type" : "PATH",
+			"value" : "bin"
+		},
+		{
+			"name" : "CMAKE_INSTALL_DATADIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Read-only architecture-independent data (DATAROOTDIR)"
+				}
+			],
+			"type" : "PATH",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_INSTALL_DATAROOTDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Read-only architecture-independent data root (share)"
+				}
+			],
+			"type" : "PATH",
+			"value" : "share"
+		},
+		{
+			"name" : "CMAKE_INSTALL_DOCDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Documentation root (DATAROOTDIR/doc/PROJECT_NAME)"
+				}
+			],
+			"type" : "PATH",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_INSTALL_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "C header files (include)"
+				}
+			],
+			"type" : "PATH",
+			"value" : "include"
+		},
+		{
+			"name" : "CMAKE_INSTALL_INFODIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Info documentation (DATAROOTDIR/info)"
+				}
+			],
+			"type" : "PATH",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_INSTALL_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Object code libraries (lib)"
+				}
+			],
+			"type" : "PATH",
+			"value" : "lib"
+		},
+		{
+			"name" : "CMAKE_INSTALL_LIBEXECDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Program executables (libexec)"
+				}
+			],
+			"type" : "PATH",
+			"value" : "libexec"
+		},
+		{
+			"name" : "CMAKE_INSTALL_LOCALEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Locale-dependent data (DATAROOTDIR/locale)"
+				}
+			],
+			"type" : "PATH",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_INSTALL_LOCALSTATEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Modifiable single-machine data (var)"
+				}
+			],
+			"type" : "PATH",
+			"value" : "var"
+		},
+		{
+			"name" : "CMAKE_INSTALL_MANDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Man documentation (DATAROOTDIR/man)"
+				}
+			],
+			"type" : "PATH",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_INSTALL_NAME_TOOL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/bin/install_name_tool"
+		},
+		{
+			"name" : "CMAKE_INSTALL_OLDINCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "C header files for non-gcc (/usr/include)"
+				}
+			],
+			"type" : "PATH",
+			"value" : "/usr/include"
+		},
+		{
+			"name" : "CMAKE_INSTALL_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Install path prefix, prepended onto install directories."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/usr/local"
+		},
+		{
+			"name" : "CMAKE_INSTALL_RUNSTATEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Run-time variable data (LOCALSTATEDIR/run)"
+				}
+			],
+			"type" : "PATH",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_INSTALL_SBINDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "System admin executables (sbin)"
+				}
+			],
+			"type" : "PATH",
+			"value" : "sbin"
+		},
+		{
+			"name" : "CMAKE_INSTALL_SHAREDSTATEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Modifiable architecture-independent data (com)"
+				}
+			],
+			"type" : "PATH",
+			"value" : "com"
+		},
+		{
+			"name" : "CMAKE_INSTALL_SYSCONFDIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Read-only single-machine data (etc)"
+				}
+			],
+			"type" : "PATH",
+			"value" : "etc"
+		},
+		{
+			"name" : "CMAKE_LINKER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/ld.lld"
+		},
+		{
+			"name" : "CMAKE_MAKE_PROGRAM",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "No help, variable specified on the command line."
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : "/usr/bin/make"
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_NM",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-nm"
+		},
+		{
+			"name" : "CMAKE_NUMBER_OF_MAKEFILES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "number of local generators"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "20"
+		},
+		{
+			"name" : "CMAKE_OBJCOPY",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-objcopy"
+		},
+		{
+			"name" : "CMAKE_OBJDUMP",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-objdump"
+		},
+		{
+			"name" : "CMAKE_OSX_ARCHITECTURES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Build architectures for OSX"
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_OSX_DEPLOYMENT_TARGET",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Minimum OS X version to target for deployment (at runtime); newer APIs weak linked. Set to empty string for default value."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_OSX_SYSROOT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The product will be built against the headers and libraries located inside the indicated SDK."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk"
+		},
+		{
+			"name" : "CMAKE_PLATFORM_INFO_INITIALIZED",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Platform information initialized"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "CMAKE_PROJECT_DESCRIPTION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_PROJECT_HOMEPAGE_URL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_PROJECT_NAME",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "absl"
+		},
+		{
+			"name" : "CMAKE_RANLIB",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ranlib"
+		},
+		{
+			"name" : "CMAKE_READELF",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-readelf"
+		},
+		{
+			"name" : "CMAKE_ROOT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to CMake installation."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/Users/bytedance/Library/Android/sdk/cmake/3.18.1/share/cmake-3.18"
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_SKIP_INSTALL_RPATH",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "If set, runtime paths are not added when installing shared libraries, but are added when building."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "NO"
+		},
+		{
+			"name" : "CMAKE_SKIP_RPATH",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "If set, runtime paths are not added when using shared libraries."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "NO"
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of static libraries during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of static libraries during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of static libraries during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of static libraries during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of static libraries during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STRIP",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-strip"
+		},
+		{
+			"name" : "CMAKE_UNAME",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "uname command"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/usr/bin/uname"
+		},
+		{
+			"name" : "CMAKE_VERBOSE_MAKEFILE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "If this value is on, makefiles will be generated without the .SILENT directive, and all commands will be echoed to the console during the make.  This is useful for debugging only. With Visual Studio IDE projects all commands are done without /nologo."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "FALSE"
+		},
+		{
+			"name" : "CoreFoundation",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/Library/Frameworks/CoreFoundation.framework"
+		},
+		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_Threads",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding Threads"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[TRUE][v()]"
+		},
+		{
+			"name" : "LIBRT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "LIBRT-NOTFOUND"
+		},
+		{
+			"name" : "ProcessorCount_cmd_sysctl",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/sbin/sysctl"
+		},
+		{
+			"name" : "THREADS_HAVE_PTHREAD_ARG",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Result of TRY_COMPILE"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "TRUE"
+		},
+		{
+			"name" : "_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "CMAKE_INSTALL_PREFIX during last run"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/usr/local"
+		},
+		{
+			"name" : "absl_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/bytedance/abseil-cpp/cmake-build-debug"
+		},
+		{
+			"name" : "absl_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/bytedance/abseil-cpp"
+		},
+		{
+			"name" : "bad_any_cast_impl_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::raw_logging_internal;"
+		},
+		{
+			"name" : "bad_optional_access_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::raw_logging_internal;"
+		},
+		{
+			"name" : "bad_variant_access_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::raw_logging_internal;"
+		},
+		{
+			"name" : "base_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::log_severity;general;absl::raw_logging_internal;general;absl::spinlock_wait;general;absl::type_traits;"
+		},
+		{
+			"name" : "cord_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::base;general;absl::cord_internal;general;absl::cordz_functions;general;absl::cordz_info;general;absl::optional;general;absl::raw_logging_internal;general;absl::strings;"
+		},
+		{
+			"name" : "cord_internal_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::raw_logging_internal;general;absl::strings;general;absl::throw_delegate;"
+		},
+		{
+			"name" : "cordz_functions_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::exponential_biased;general;absl::raw_logging_internal;"
+		},
+		{
+			"name" : "cordz_handle_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::base;general;absl::raw_logging_internal;general;absl::synchronization;"
+		},
+		{
+			"name" : "cordz_info_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::base;general;absl::cord_internal;general;absl::cordz_functions;general;absl::cordz_handle;general;absl::span;general;absl::raw_logging_internal;general;absl::stacktrace;general;absl::synchronization;"
+		},
+		{
+			"name" : "cordz_sample_token_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::cordz_handle;general;absl::cordz_info;"
+		},
+		{
+			"name" : "debugging_internal_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::raw_logging_internal;"
+		},
+		{
+			"name" : "demangle_internal_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::base;"
+		},
+		{
+			"name" : "examine_stack_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::stacktrace;general;absl::symbolize;general;absl::raw_logging_internal;"
+		},
+		{
+			"name" : "failure_signal_handler_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::examine_stack;general;absl::stacktrace;general;absl::base;general;absl::raw_logging_internal;"
+		},
+		{
+			"name" : "flags_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::flags_commandlineflag;general;absl::flags_config;general;absl::flags_internal;general;absl::flags_reflection;general;absl::base;general;absl::strings;"
+		},
+		{
+			"name" : "flags_commandlineflag_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::flags_commandlineflag_internal;general;absl::optional;general;absl::strings;"
+		},
+		{
+			"name" : "flags_config_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::flags_program_name;general;absl::strings;general;absl::synchronization;"
+		},
+		{
+			"name" : "flags_internal_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::base;general;absl::flags_commandlineflag;general;absl::flags_commandlineflag_internal;general;absl::flags_config;general;absl::flags_marshalling;general;absl::synchronization;general;absl::meta;general;absl::utility;"
+		},
+		{
+			"name" : "flags_marshalling_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::log_severity;general;absl::strings;general;absl::str_format;"
+		},
+		{
+			"name" : "flags_parse_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::flags_config;general;absl::flags;general;absl::flags_commandlineflag;general;absl::flags_commandlineflag_internal;general;absl::flags_internal;general;absl::flags_private_handle_accessor;general;absl::flags_program_name;general;absl::flags_reflection;general;absl::flags_usage;general;absl::strings;general;absl::synchronization;"
+		},
+		{
+			"name" : "flags_private_handle_accessor_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::flags_commandlineflag;general;absl::flags_commandlineflag_internal;general;absl::strings;"
+		},
+		{
+			"name" : "flags_program_name_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::strings;general;absl::synchronization;"
+		},
+		{
+			"name" : "flags_reflection_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::flags_commandlineflag;general;absl::flags_private_handle_accessor;general;absl::flags_config;general;absl::strings;general;absl::synchronization;"
+		},
+		{
+			"name" : "flags_usage_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::flags_usage_internal;general;absl::strings;general;absl::synchronization;"
+		},
+		{
+			"name" : "flags_usage_internal_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::flags_config;general;absl::flags;general;absl::flags_commandlineflag;general;absl::flags_internal;general;absl::flags_private_handle_accessor;general;absl::flags_program_name;general;absl::flags_reflection;general;absl::strings;general;absl::synchronization;"
+		},
+		{
+			"name" : "graphcycles_internal_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::base;general;absl::malloc_internal;general;absl::raw_logging_internal;"
+		},
+		{
+			"name" : "hash_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::city;general;absl::meta;general;absl::int128;general;absl::strings;general;absl::optional;general;absl::variant;general;absl::utility;general;absl::wyhash;"
+		},
+		{
+			"name" : "hashtablez_sampler_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::base;general;absl::exponential_biased;general;absl::have_sse;general;absl::synchronization;"
+		},
+		{
+			"name" : "log_severity_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::core_headers;"
+		},
+		{
+			"name" : "malloc_internal_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::base;general;absl::base_internal;general;absl::raw_logging_internal;"
+		},
+		{
+			"name" : "periodic_sampler_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::exponential_biased;"
+		},
+		{
+			"name" : "random_distributions_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::random_internal_generate_real;general;absl::random_internal_distribution_caller;general;absl::random_internal_fast_uniform_bits;general;absl::random_internal_fastmath;general;absl::random_internal_iostream_state_saver;general;absl::random_internal_traits;general;absl::random_internal_uniform_helper;general;absl::random_internal_wide_multiply;general;absl::strings;"
+		},
+		{
+			"name" : "random_internal_distribution_test_util_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::raw_logging_internal;general;absl::strings;general;absl::str_format;general;absl::span;"
+		},
+		{
+			"name" : "random_internal_pool_urbg_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::base;general;absl::random_internal_randen;general;absl::random_internal_seed_material;general;absl::random_seed_gen_exception;general;absl::raw_logging_internal;general;absl::span;"
+		},
+		{
+			"name" : "random_internal_randen_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::random_internal_platform;general;absl::random_internal_randen_hwaes;general;absl::random_internal_randen_slow;"
+		},
+		{
+			"name" : "random_internal_randen_hwaes_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::random_internal_platform;general;absl::random_internal_randen_hwaes_impl;"
+		},
+		{
+			"name" : "random_internal_randen_hwaes_impl_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::random_internal_platform;"
+		},
+		{
+			"name" : "random_internal_randen_slow_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::random_internal_platform;"
+		},
+		{
+			"name" : "random_internal_seed_material_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::optional;general;absl::raw_logging_internal;general;absl::span;general;absl::strings;"
+		},
+		{
+			"name" : "random_seed_sequences_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::random_internal_nonsecure_base;general;absl::random_internal_pool_urbg;general;absl::random_internal_salted_seed_seq;general;absl::random_internal_seed_material;general;absl::random_seed_gen_exception;general;absl::span;"
+		},
+		{
+			"name" : "raw_hash_set_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::bits;general;absl::layout;general;absl::memory;general;absl::meta;general;absl::optional;general;absl::utility;general;absl::hashtablez_sampler;"
+		},
+		{
+			"name" : "raw_logging_internal_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::config;general;absl::core_headers;general;absl::log_severity;"
+		},
+		{
+			"name" : "scoped_set_env_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::raw_logging_internal;"
+		},
+		{
+			"name" : "spinlock_wait_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::base_internal;general;absl::core_headers;"
+		},
+		{
+			"name" : "stacktrace_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::debugging_internal;"
+		},
+		{
+			"name" : "status_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::raw_logging_internal;general;absl::stacktrace;general;absl::symbolize;general;absl::strings;general;absl::cord;general;absl::str_format;general;absl::optional;"
+		},
+		{
+			"name" : "statusor_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::base;general;absl::status;general;absl::raw_logging_internal;general;absl::strings;general;absl::utility;general;absl::variant;"
+		},
+		{
+			"name" : "str_format_internal_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::strings;general;absl::int128;general;absl::span;"
+		},
+		{
+			"name" : "strings_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::strings_internal;general;absl::base;general;absl::int128;general;absl::raw_logging_internal;general;absl::throw_delegate;"
+		},
+		{
+			"name" : "strings_internal_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::raw_logging_internal;"
+		},
+		{
+			"name" : "symbolize_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::debugging_internal;general;absl::demangle_internal;general;absl::base;general;absl::malloc_internal;general;absl::raw_logging_internal;general;absl::strings;"
+		},
+		{
+			"name" : "synchronization_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::graphcycles_internal;general;absl::base;general;absl::malloc_internal;general;absl::raw_logging_internal;general;absl::stacktrace;general;absl::symbolize;general;absl::time;"
+		},
+		{
+			"name" : "throw_delegate_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::raw_logging_internal;"
+		},
+		{
+			"name" : "time_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::base;general;absl::civil_time;general;absl::int128;general;absl::raw_logging_internal;general;absl::strings;general;absl::time_zone;"
+		},
+		{
+			"name" : "wyhash_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;absl::int128;"
+		}
+	],
+	"kind" : "cache",
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 0
+	}
+}

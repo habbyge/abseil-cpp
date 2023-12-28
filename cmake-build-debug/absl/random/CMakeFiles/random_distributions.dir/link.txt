@@ -1,0 +1,2 @@
+/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar qc libabsl_random_distributions.a CMakeFiles/random_distributions.dir/discrete_distribution.cc.o CMakeFiles/random_distributions.dir/gaussian_distribution.cc.o
+/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ranlib libabsl_random_distributions.a

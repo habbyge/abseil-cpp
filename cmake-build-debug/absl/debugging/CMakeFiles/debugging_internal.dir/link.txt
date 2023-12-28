@@ -1,0 +1,2 @@
+/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar qc libabsl_debugging_internal.a CMakeFiles/debugging_internal.dir/internal/address_is_readable.cc.o CMakeFiles/debugging_internal.dir/internal/elf_mem_image.cc.o CMakeFiles/debugging_internal.dir/internal/vdso_support.cc.o
+/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ranlib libabsl_debugging_internal.a

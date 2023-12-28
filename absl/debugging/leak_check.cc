@@ -24,10 +24,10 @@
 namespace absl {
 ABSL_NAMESPACE_BEGIN
 bool HaveLeakSanitizer() { // Sanitizer 消毒剂的意思
-  return false; 
+  return false;
 }
 bool LeakCheckerIsActive() {
-  return false; 
+  return false;
 }
 void DoIgnoreLeak(const void*) { }
 void RegisterLivePointers(const void*, size_t) { }

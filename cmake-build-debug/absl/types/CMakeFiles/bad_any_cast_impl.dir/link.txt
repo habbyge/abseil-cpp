@@ -1,0 +1,2 @@
+/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar qc libabsl_bad_any_cast_impl.a CMakeFiles/bad_any_cast_impl.dir/bad_any_cast.cc.o
+/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ranlib libabsl_bad_any_cast_impl.a

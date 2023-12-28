@@ -1,0 +1,2 @@
+/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar qc libabsl_base.a CMakeFiles/base.dir/internal/cycleclock.cc.o CMakeFiles/base.dir/internal/spinlock.cc.o CMakeFiles/base.dir/internal/sysinfo.cc.o CMakeFiles/base.dir/internal/thread_identity.cc.o CMakeFiles/base.dir/internal/unscaledcycleclock.cc.o
+/Users/bytedance/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ranlib libabsl_base.a

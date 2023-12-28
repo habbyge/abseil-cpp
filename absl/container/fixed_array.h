@@ -317,7 +317,9 @@ class FixedArray {
   // FixedArray::crbegin()
   //
   // Returns a const reverse iterator from the end of the fixed array.
-  const_reverse_iterator crbegin() const { return rbegin(); }
+  const_reverse_iterator crbegin() const {
+    return rbegin();
+  }
 
   // FixedArray::rend()
   //
