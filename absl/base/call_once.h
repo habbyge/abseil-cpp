@@ -192,14 +192,10 @@ void CallOnceImpl(std::atomic<uint32_t>* control,
   // The base_internal::SpinLockWait() call returns either kOnceInit or
   // kOnceDone. If it returns kOnceDone, it must have loaded the control word
   // with std::memory_order_acquire and seen a value of kOnceDone.
-  // 短路最简单的情况，以避免过程调用开销。base_internal::SpinLockWait()调用返回 
-  // kOnceInit 或 kOnceDone。如果它返回 kOnceDone，它一定已经用 
+  // 短路最简单的情况，以避免过程调用开销。base_internal::SpinLockWait()调用返回
+  // kOnceInit 或 kOnceDone。如果它返回 kOnceDone，它一定已经用
   // std::memory_order_acquire 加载了控制字并且看到了 kOnceDone 的值。
   uint32_t old_control = kOnceInit;
-<<<<<<< HEAD
-  if (control->compare_exchange_strong(old_control,
-                                       kOnceRunning,
-=======
   // 第1次(当前线程)：control的默认状态是0，即:kOnceInit，在
   // compare_exchange_strong()中被交换为kOnceRunning，并返回为true，则该thread会
   // 继续执行invoke()，即执行call_once()的回调函数，完成仅有的1次调用。
@@ -211,24 +207,19 @@ void CallOnceImpl(std::atomic<uint32_t>* control,
   // 综上：只有一条线程会执行到call_once()的callback函数，其他线程要么阻塞等待第1条
   // 线程执行完，要么直接跳过，因此正如其名："call once"。
   if (control->compare_exchange_strong(old_control, kOnceRunning,
->>>>>>> 72b85dffd646572a6fe291765b593add8f8b57fb
                                        std::memory_order_relaxed) ||
       base_internal::SpinLockWait(control,
                                   ABSL_ARRAYSIZE(trans),
                                   trans,
                                   scheduling_mode) == kOnceInit) {
 
-<<<<<<< HEAD
-    base_internal::invoke(std::forward<Callable>(fn), std::forward<Args>(args)...);
-    old_control = control->exchange(base_internal::kOnceDone, std::memory_order_release);
-=======
     base_internal::invoke(std::forward<Callable>(fn),
                           std::forward<Args>(args)...);
 
     // exchange(): 原子地替换原子对象的值并返回它先前持有的值
-    old_control = control->exchange(base_internal::kOnceDone, 
+    old_control = control->exchange(base_internal::kOnceDone,
                                     std::memory_order_release);
->>>>>>> 72b85dffd646572a6fe291765b593add8f8b57fb
+
     if (old_control == base_internal::kOnceWaiter) {
       base_internal::SpinLockWake(control, true); // 唤醒等待状态的其他线程
     }

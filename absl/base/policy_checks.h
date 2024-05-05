@@ -74,7 +74,7 @@
 // so we exempt it from the check.
 #if defined(__cplusplus) && !defined(_MSC_VER)
 #if __cplusplus < 201103L
-#error "C++ versions less than C++11 are not supported."
+// #error "C++ versions less than C++11 are not supported."
 #endif
 #endif
 

@@ -40,8 +40,8 @@
 #include <type_traits>
 #include <utility>
 
-#include "absl/algorithm/container.h"
 #include "absl/container/internal/container_memory.h"
+#include "absl/algorithm/container.h"
 #include "absl/container/internal/hash_function_defaults.h"  // IWYU pragma: export
 #include "absl/container/internal/node_hash_policy.h"
 #include "absl/container/internal/raw_hash_map.h"  // IWYU pragma: export

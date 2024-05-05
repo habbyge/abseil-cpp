@@ -43,14 +43,9 @@ uint32_t SpinLockWait(std::atomic<uint32_t>* w, int n,
   for (;;) {
     uint32_t v = w->load(std::memory_order_acquire);
     int i;
-<<<<<<< HEAD
-    for (i = 0; i != n && v != trans[i].from; i++) {}
-    if (i == n) {
-=======
     // 一直找到v == n表示轮训完了也没找着 or 找到trans中的其实状态为v的，则跳出
     for (i = 0; i != n && v != trans[i].from; i++) {}
     if (i == n) { // 结束了、没找着
->>>>>>> 72b85dffd646572a6fe291765b593add8f8b57fb
       SpinLockDelay(w, v, ++loop, scheduling_mode);  // no matching transition
     } else if (trans[i].to == v ||                   // null transition
                w->compare_exchange_strong(v, trans[i].to,

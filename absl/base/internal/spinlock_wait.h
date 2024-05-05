@@ -31,12 +31,8 @@ namespace base_internal {
 
 // SpinLockWait() waits until it can perform one of several transitions from
 // "from" to "to".  It returns when it performs a transition where done==true.
-<<<<<<< HEAD
-// SpinLockWait() 一直等到它可以执行从“从”到“到”的多个转换之一。 它在执行 done==true 的转换时返回。
-=======
 // SpinLockWait() 一直等到它可以执行从 “from” 到 “to” 的多个转换之一。 它在执行 
 // done==true 的转换时返回。
->>>>>>> 72b85dffd646572a6fe291765b593add8f8b57fb
 struct SpinLockWaitTransition {
   uint32_t from;
   uint32_t to;
@@ -47,17 +43,10 @@ struct SpinLockWaitTransition {
 // satisfying 0<=i<n && trans[i].done, atomically make the transition,
 // then return the old value of *w.   Make any other atomic transitions
 // where !trans[i].done, but continue waiting.
-<<<<<<< HEAD
-// 等到 'w' 可以从 trans[i].from 过渡到 trans[i].to 一些满足 0<=i<n 
-// && trans[i].done 的 i，原子地进行过渡，然后返回旧的值 w. 
-// 在 !trans[i].done 处进行任何其他原子转换，但继续等待。
-uint32_t SpinLockWait(std::atomic<uint32_t>* w, int n,
-=======
 // 等到 *w 可以从 trans[i].from 过渡到 trans[i].to，一些满足：
 // 0<=i<n && trans[i].done 的 i，原子地进行过渡，然后返回 *w 的旧值. 
 // 在 !trans[i].done 处进行任何其他原子转换，但继续等待。
 uint32_t SpinLockWait(std::atomic<uint32_t> *w, int n,
->>>>>>> 72b85dffd646572a6fe291765b593add8f8b57fb
                       const SpinLockWaitTransition trans[],
                       SchedulingMode scheduling_mode);
 
@@ -65,15 +54,10 @@ uint32_t SpinLockWait(std::atomic<uint32_t> *w, int n,
 // is true, wake all such threads. On some systems, this may be a no-op; on
 // those systems, threads calling SpinLockDelay() will always wake eventually
 // even if SpinLockWake() is never called.
-<<<<<<< HEAD
-// 在这些系统上，即使从不调用 SpinLockWake()，调用 SpinLockDelay() 的线程最终也将始终唤醒。
-void SpinLockWake(std::atomic<uint32_t> *w, bool all);
-=======
 // 如果可能，唤醒一些调用 SpinLockDelay(w, ...) 的线程。如果 `all` 为真，则唤醒所有此类
 // 线程。在某些系统上，这可能是空操作；在这些系统上，即使从不调用 SpinLockWake()，调用 
 // SpinLockDelay() 的线程最终也将始终唤醒。
 void SpinLockWake(std::atomic<uint32_t>* w, bool all);
->>>>>>> 72b85dffd646572a6fe291765b593add8f8b57fb
 
 // Wait for an appropriate spin delay on iteration "loop" of a
 // spin loop on location *w, whose previously observed value was "value".
